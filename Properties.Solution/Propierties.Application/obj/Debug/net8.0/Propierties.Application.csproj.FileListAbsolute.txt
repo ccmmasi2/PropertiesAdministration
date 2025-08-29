@@ -1,0 +1,11 @@
+D:\Repository\Properties.Solution\Propierties.Application\bin\Debug\net8.0\Propierties.Application.deps.json
+D:\Repository\Properties.Solution\Propierties.Application\bin\Debug\net8.0\Propierties.Application.dll
+D:\Repository\Properties.Solution\Propierties.Application\bin\Debug\net8.0\Propierties.Application.pdb
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.AssemblyInfoInputs.cache
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.AssemblyInfo.cs
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.csproj.CoreCompileInputs.cache
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.dll
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\refint\Propierties.Application.dll
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\Propierties.Application.pdb
+D:\Repository\Properties.Solution\Propierties.Application\obj\Debug\net8.0\ref\Propierties.Application.dll

@@ -1,0 +1,11 @@
+D:\Repository\Properties.Solution\Properties.Tests\bin\Debug\net8.0\Properties.Tests.deps.json
+D:\Repository\Properties.Solution\Properties.Tests\bin\Debug\net8.0\Properties.Tests.dll
+D:\Repository\Properties.Solution\Properties.Tests\bin\Debug\net8.0\Properties.Tests.pdb
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.AssemblyInfoInputs.cache
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.AssemblyInfo.cs
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.csproj.CoreCompileInputs.cache
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.dll
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\refint\Properties.Tests.dll
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\Properties.Tests.pdb
+D:\Repository\Properties.Solution\Properties.Tests\obj\Debug\net8.0\ref\Properties.Tests.dll

@@ -1,0 +1,11 @@
+D:\Repository\Properties.Solution\Properties.Domain\bin\Debug\net8.0\Properties.Domain.deps.json
+D:\Repository\Properties.Solution\Properties.Domain\bin\Debug\net8.0\Properties.Domain.dll
+D:\Repository\Properties.Solution\Properties.Domain\bin\Debug\net8.0\Properties.Domain.pdb
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.AssemblyInfoInputs.cache
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.AssemblyInfo.cs
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.csproj.CoreCompileInputs.cache
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.dll
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\refint\Properties.Domain.dll
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\Properties.Domain.pdb
+D:\Repository\Properties.Solution\Properties.Domain\obj\Debug\net8.0\ref\Properties.Domain.dll

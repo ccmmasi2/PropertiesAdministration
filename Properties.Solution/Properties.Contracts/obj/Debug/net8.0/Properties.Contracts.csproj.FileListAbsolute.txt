@@ -1,0 +1,11 @@
+D:\Repository\Properties.Solution\Properties.Contracts\bin\Debug\net8.0\Properties.Contracts.deps.json
+D:\Repository\Properties.Solution\Properties.Contracts\bin\Debug\net8.0\Properties.Contracts.dll
+D:\Repository\Properties.Solution\Properties.Contracts\bin\Debug\net8.0\Properties.Contracts.pdb
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.AssemblyInfoInputs.cache
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.AssemblyInfo.cs
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.csproj.CoreCompileInputs.cache
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.dll
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\refint\Properties.Contracts.dll
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\Properties.Contracts.pdb
+D:\Repository\Properties.Solution\Properties.Contracts\obj\Debug\net8.0\ref\Properties.Contracts.dll
