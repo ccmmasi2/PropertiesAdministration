@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.Net;
-using System.Xml.Linq;
-
-namespace Properties.Domain
+﻿namespace Properties.Domain
 {
     public class PropertyImage
     {
