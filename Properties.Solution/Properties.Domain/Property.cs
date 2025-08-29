@@ -11,5 +11,20 @@
 
         public int IdOwner { get; private set; }
         public Owner Owner { get; private set; } = default!;
+
+        public ICollection<PropertyImage> PropertyImages { get; private set; } = new List<PropertyImage>();
+        public ICollection<PropertyTrace> PropertyTraces { get; private set; } = new List<PropertyTrace>();
+
+        protected Property() { }
+
+        public Property(string name, string address, decimal price, string codeInternal, int year, int idOwner)
+        {
+            Name = name;
+            Address = address;
+            Price = price;
+            CodeInternal = codeInternal;
+            Year = year;
+            IdOwner = idOwner;
+        }
     }
 }

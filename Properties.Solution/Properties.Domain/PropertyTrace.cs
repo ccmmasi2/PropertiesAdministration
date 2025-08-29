@@ -10,5 +10,16 @@
 
         public int IdProperty { get; private set; }
         public Property Property { get; private set; } = default!;
+
+        protected PropertyTrace() { }
+
+        public PropertyTrace(DateTime dateState, string name, decimal value, decimal tax, int idProperty)
+        {
+            DateState = dateState;
+            Name = name;
+            Value = value;
+            Tax = tax;
+            IdProperty = idProperty;
+        }
     }
 }
