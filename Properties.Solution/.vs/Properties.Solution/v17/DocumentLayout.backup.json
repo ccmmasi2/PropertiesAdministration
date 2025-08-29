@@ -1,12 +1,88 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Repository\\Properties.Solution\\",
-  "Documents": [],
+  "WorkspaceRootPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|d:\\repository\\properties\\propertiesadministration\\properties.solution\\properties.domain\\propertyname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|solutionrelative:properties.domain\\propertyname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|d:\\repository\\properties\\propertiesadministration\\properties.solution\\properties.domain\\property.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|solutionrelative:properties.domain\\property.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|d:\\repository\\properties\\propertiesadministration\\properties.solution\\properties.domain\\owner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|solutionrelative:properties.domain\\owner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|d:\\repository\\properties\\propertiesadministration\\properties.solution\\properties.domain\\propertytrace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}|Properties.Domain\\Properties.Domain.csproj|solutionrelative:properties.domain\\propertytrace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PropertyName.cs",
+              "DocumentMoniker": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\PropertyName.cs",
+              "RelativeDocumentMoniker": "Properties.Domain\\PropertyName.cs",
+              "ToolTip": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\PropertyName.cs",
+              "RelativeToolTip": "Properties.Domain\\PropertyName.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T15:44:35.896Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Property.cs",
+              "DocumentMoniker": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\Property.cs",
+              "RelativeDocumentMoniker": "Properties.Domain\\Property.cs",
+              "ToolTip": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\Property.cs",
+              "RelativeToolTip": "Properties.Domain\\Property.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T15:44:35.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PropertyTrace.cs",
+              "DocumentMoniker": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\PropertyTrace.cs",
+              "RelativeDocumentMoniker": "Properties.Domain\\PropertyTrace.cs",
+              "ToolTip": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\PropertyTrace.cs",
+              "RelativeToolTip": "Properties.Domain\\PropertyTrace.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T15:44:35.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Owner.cs",
+              "DocumentMoniker": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\Owner.cs",
+              "RelativeDocumentMoniker": "Properties.Domain\\Owner.cs",
+              "ToolTip": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Domain\\Owner.cs",
+              "RelativeToolTip": "Properties.Domain\\Owner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-29T15:44:14.015Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

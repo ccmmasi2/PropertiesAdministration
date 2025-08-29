@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repository\\Properties.Solution\\Properties.Tests\\Properties.Tests.csproj",
+      "projectUniqueName": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Tests\\Properties.Tests.csproj",
       "projectName": "Properties.Tests",
-      "projectPath": "D:\\Repository\\Properties.Solution\\Properties.Tests\\Properties.Tests.csproj",
+      "projectPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Tests\\Properties.Tests.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "D:\\Repository\\Properties.Solution\\Properties.Tests\\obj\\",
+      "outputPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Repository\\Properties.Solution\\Properties.Contracts\\Properties.Contracts.csproj",
+      "projectUniqueName": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Contracts\\Properties.Contracts.csproj",
       "projectName": "Properties.Contracts",
-      "projectPath": "D:\\Repository\\Properties.Solution\\Properties.Contracts\\Properties.Contracts.csproj",
+      "projectPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Contracts\\Properties.Contracts.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "D:\\Repository\\Properties.Solution\\Properties.Contracts\\obj\\",
+      "outputPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repository\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj": {}
+    "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Repository\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj": {
+    "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repository\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj",
         "projectName": "Properties.Infrastructure",
-        "projectPath": "D:\\Repository\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj",
+        "projectPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Infrastructure\\Properties.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "D:\\Repository\\Properties.Solution\\Properties.Infrastructure\\obj\\",
+        "outputPath": "D:\\Repository\\Properties\\PropertiesAdministration\\Properties.Solution\\Properties.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
