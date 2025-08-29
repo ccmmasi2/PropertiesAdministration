@@ -4,7 +4,7 @@ using static Properties.Contracts.Enums.Enumerators;
 
 namespace Properties.Contracts.DTO
 {
-    public record OwnerDTO
+    public record OwnerDto
     {
         public int IdOwner { get; init; }
 

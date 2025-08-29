@@ -4,8 +4,8 @@ namespace Properties.Application.Interface
 {
     public interface IOwnerService
     {
-        Task<OwnerDTO> CreateWithValidationAsync(OwnerDTO dto);
-        Task<List<OwnerDTO>> GetAllAsync();
-        Task<OwnerDTO?> GetByIdAsync(int id);
+        Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto);
+        Task<List<OwnerDto>> GetAllAsync();
+        Task<OwnerDto?> GetByIdAsync(int id);
     }
 }

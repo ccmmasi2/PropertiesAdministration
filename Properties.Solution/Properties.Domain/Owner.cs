@@ -18,7 +18,7 @@ namespace Properties.Domain
 
         protected Owner() { }
 
-        public Owner(string name, IdentificationType identificationType, string identification, string address, string photo, DateTime birthDay)
+        public Owner(string name, IdentificationType identificationType, string identification, string address, string? photo, DateTime birthDay)
         {
             Name = name;
             IdentificationType = identificationType;
