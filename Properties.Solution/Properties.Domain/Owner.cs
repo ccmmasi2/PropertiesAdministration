@@ -11,7 +11,7 @@ namespace Properties.Domain
         public string Identification { get; private set; } = default!;
 
         public string Address { get; private set; } = default!;
-        public string Photo { get; private set; } = default!;
+        public string? Photo { get; private set; }
         public DateTime BirthDay { get; private set; } = default!;
 
         public ICollection<Property> Properties { get; private set; } = new List<Property>();

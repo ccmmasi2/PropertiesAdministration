@@ -55,7 +55,7 @@ namespace Properties.Infrastructure
                     .ValueGeneratedOnAdd();
 
                 builder.Property(x => x.Name)
-                    .HasMaxLength(50)
+                    .HasMaxLength(200)
                     .IsRequired();
 
                 builder.Property(x => x.Address)
