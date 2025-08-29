@@ -4,8 +4,6 @@ using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
 using Properties.Domain;
-using System.Net;
-using System.Xml.Linq;
 
 namespace Properties.Infrastructure.Implementation
 {
@@ -41,7 +39,7 @@ namespace Properties.Infrastructure.Implementation
         public async Task<PropertyDto?> GetByIdAsync(int id)
         {
             var property = await _db.Properties
-                .Where(x => x.IdOwner == id)
+                .Where(x => x.IdProperty == id)
                 .Select(x => new PropertyDto
                 {
                     IdProperty = x.IdProperty,
@@ -59,7 +57,7 @@ namespace Properties.Infrastructure.Implementation
                 .FirstOrDefaultAsync();
 
             if (property == null)
-                throw new NotFoundException($"Owner with ID {id} not found.");
+                throw new NotFoundException($"Property with ID {id} not found.");
 
             return property;
         }

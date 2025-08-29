@@ -8,7 +8,7 @@ namespace Properties.Contracts.DTO
         public int IdPropertyImage { get; init; }
 
         [Required, MaxLength(5000)]
-        public string? File { get; init; }
+        public string File { get; init; } = default!;
 
         [DefaultValue(true)]
         public bool Enable { get; init; }
