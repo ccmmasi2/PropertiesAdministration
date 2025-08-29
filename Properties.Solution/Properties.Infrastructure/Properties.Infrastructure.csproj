@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Logging\" />
     <Folder Include="Implementation\" />
     <Folder Include="SeedData\SeedDTO\" />
   </ItemGroup>
@@ -23,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Properties.Domain\Properties.Domain.csproj" />
+    <ProjectReference Include="..\Propierties.Application\Properties.Application.csproj" />
   </ItemGroup>
 
 </Project>
