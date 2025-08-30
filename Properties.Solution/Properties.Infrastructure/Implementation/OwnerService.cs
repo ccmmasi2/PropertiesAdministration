@@ -54,14 +54,12 @@ namespace Properties.Infrastructure.Implementation
 
         public async Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto)
         {
-            var exists = await _db.Owners.AnyAsync(x =>
-                                                    x.Identification.ToLower() == dto.Identification.ToLower());
+            var exists = await _db.Owners.AnyAsync(x => x.Identification.ToLower() == dto.Identification.ToLower());
 
             if (exists)
                 throw new InvalidOperationException("Owner with Identification {dto.Identification} already exists.");
 
             var owner = new Owner(dto.Name, dto.IdentificationType, dto.Identification, dto.Address, dto.Photo, dto.BirthDay);
-
             _db.Owners.Add(owner);
             await _db.SaveChangesAsync();
 

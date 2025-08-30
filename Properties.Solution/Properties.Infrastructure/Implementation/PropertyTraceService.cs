@@ -60,7 +60,6 @@ namespace Properties.Infrastructure.Implementation
                 throw new InvalidOperationException("Property Image with File {dto.File} and IdProperty {dto.IdProperty} already exists.");
 
             var propertyTrace = new PropertyTrace(dto.DateState, dto.Name, dto.Value, dto.Tax, dto.IdProperty);
-
             _db.PropertyTraces.Add(propertyTrace);
             await _db.SaveChangesAsync();
 

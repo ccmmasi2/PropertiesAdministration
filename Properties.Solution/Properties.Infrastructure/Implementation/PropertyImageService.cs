@@ -50,13 +50,11 @@ namespace Properties.Infrastructure.Implementation
 
         public async Task<PropertyImageDto> CreateWithValidationAsync(PropertyImageDto dto)
         {
-            var exists = await _db.PropertyImages.AnyAsync(x =>
-                                                    x.File == dto.File && x.IdProperty == dto.IdProperty);
+            var exists = await _db.PropertyImages.AnyAsync(x => x.File == dto.File && x.IdProperty == dto.IdProperty);
             if (exists)
                 throw new InvalidOperationException("Property Image with File {dto.File} and IdProperty {dto.IdProperty} already exists.");
 
             var propertyImage = new PropertyImage(dto.File, dto.Enable, dto.IdProperty);
-
             _db.PropertyImages.Add(propertyImage);
             await _db.SaveChangesAsync();
 

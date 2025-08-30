@@ -64,35 +64,41 @@ namespace Properties.Infrastructure.Implementation
 
         public async Task<PropertyDto> CreateWithValidationAsync(PropertyDto dto)
         {
-            var exists = await _db.Properties.AnyAsync(x =>
-                                                    x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
+            var exists = await _db.Owners.AnyAsync(x => x.IdOwner == dto.IdOwner);
+            if (!exists)
+                throw new InvalidOperationException("Owner with IdOwner {dto.IdOwner} does not exist");
+
+            exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
             if (exists)
                 throw new InvalidOperationException("Property with CodeInternal {dto.CodeInternal} already exists.");
 
-            exists = await _db.Properties.AnyAsync(x =>
-                                                    x.Name.ToLower() == dto.Name.ToLower() && x.IdOwner == dto.IdOwner);
+            exists = await _db.Properties.AnyAsync(x => x.Name.ToLower() == dto.Name.ToLower() && x.IdOwner == dto.IdOwner);
             if (exists)
                 throw new InvalidOperationException("Property with Name {dto.Name} and IdOwner {dto.IdOwner} already exists.");
 
             var property = new Property(dto.Name, dto.Address, dto.Price, dto.CodeInternal, dto.Year, dto.IdOwner);
-
             _db.Properties.Add(property);
             await _db.SaveChangesAsync();
 
-            var resultDto = new PropertyDto
-            {
-                IdProperty = property.IdProperty,
-                Name = property.Name,
-                Address = property.Address,
-                Price = property.Price,
-                CodeInternal = property.CodeInternal,
-                Year = property.Year,
+            var resultDto = await _db.Properties
+                .Include(p => p.Owner)
+                .Where(p => p.IdProperty == property.IdProperty)
+                .Select(p => new PropertyDto
+                {
+                    IdProperty = p.IdProperty,
+                    Name = p.Name,
+                    Address = p.Address,
+                    Price = p.Price,
+                    CodeInternal = p.CodeInternal,
+                    Year = p.Year,
 
-                IdOwner = property.IdOwner,
-                OwnerIdentification = property.Owner.Identification,
-                OwnerIdentificationType = property.Owner.IdentificationType,
-                OwnerName = property.Owner.Name
-            };
+                    IdOwner = p.IdOwner,
+                    OwnerIdentification = p.Owner.Identification,
+                    OwnerIdentificationType = p.Owner.IdentificationType,
+                    OwnerName = p.Owner.Name
+                })
+                .FirstAsync();
+
             return resultDto;
         } 
     }
