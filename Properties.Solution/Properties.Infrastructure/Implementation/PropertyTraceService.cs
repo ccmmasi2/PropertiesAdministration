@@ -57,7 +57,7 @@ namespace Properties.Infrastructure.Implementation
             var exists = await _db.PropertyTraces.AnyAsync(x =>
                                                     x.Name == dto.Name && x.IdProperty == dto.IdProperty);
             if (exists)
-                throw new InvalidOperationException("Property Image with File {dto.File} and IdProperty {dto.IdProperty} already exists.");
+                throw new InvalidOperationException("Property Trace with File {dto.File} and IdProperty {dto.IdProperty} already exists.");
 
             var propertyTrace = new PropertyTrace(dto.DateState, dto.Name, dto.Value, dto.Tax, dto.IdProperty);
             _db.PropertyTraces.Add(propertyTrace);
