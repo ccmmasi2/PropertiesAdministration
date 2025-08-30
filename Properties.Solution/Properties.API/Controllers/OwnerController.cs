@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Properties.API.LocalDTOs;
 using Properties.Application.Interface;
+using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
 
 namespace Properties.API.Controllers
@@ -10,10 +12,12 @@ namespace Properties.API.Controllers
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService _service;
+        private readonly IPhotoService _photoService;
 
-        public OwnerController(IOwnerService service)
+        public OwnerController(IOwnerService service, IPhotoService photoService)
         {
             _service = service;
+            _photoService = photoService;
         }
 
         [Authorize(Policy = "AdminOnly")]
@@ -34,9 +38,27 @@ namespace Properties.API.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<IActionResult> Create(OwnerDto dto)
+        public async Task<IActionResult> Create([FromForm] OwnerCreateDto dto)
         {
-            var created = await _service.CreateWithValidationAsync(dto);
+            string? photoUrl = null;
+            if (dto.Photo != null)
+            {
+                var photoName = $"Owner_{dto.Identification}_{DateTime.Now:yyyyMMddHHmmssfff}";
+                await using var stream = dto.Photo.OpenReadStream();
+                photoUrl = await _photoService.UploadPhotoAsync(stream, photoName);
+            }
+
+            var dtoToService = new OwnerDto
+            {
+                Name = dto.Name,
+                IdentificationType = dto.IdentificationType,
+                Identification = dto.Identification,
+                Address = dto.Address,
+                Photo = photoUrl,
+                BirthDay = dto.BirthDay
+            };
+
+            var created = await _service.CreateWithValidationAsync(dtoToService);
             return CreatedAtAction(nameof(GetById), new { id = created.IdOwner }, created);
         }
     }
