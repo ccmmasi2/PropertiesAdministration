@@ -11,7 +11,7 @@ namespace Properties.Contracts.DTO
         [Required, MaxLength(200)]
         public string Name { get; init; } = default!;
 
-        [Required, MaxLength(3)]
+        [Required]
         public IdentificationType IdentificationType { get; init; } = default!;
 
         [Required, MaxLength(15)]
