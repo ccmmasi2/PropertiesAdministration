@@ -31,7 +31,7 @@ namespace Properties.Infrastructure.Implementation
 
         public async Task<PropertyImageDto?> GetByIdAsync(int id)
         {
-            var property = await _db.PropertyImages
+            var propertyImage = await _db.PropertyImages
                 .Where(x => x.IdPropertyImage == id)
                 .Select(x => new PropertyImageDto
                 {
@@ -42,10 +42,10 @@ namespace Properties.Infrastructure.Implementation
                 })
                 .FirstOrDefaultAsync();
 
-            if (property == null)
+            if (propertyImage == null)
                 throw new NotFoundException($"Property Image with ID {id} not found.");
 
-            return property;
+            return propertyImage;
         }
 
         public async Task<PropertyImageDto> CreateWithValidationAsync(PropertyImageDto dto)
