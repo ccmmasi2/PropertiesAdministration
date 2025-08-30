@@ -11,7 +11,6 @@ using Properties.Infrastructure.Implementation;
 using Properties.Infrastructure.Implementation.Utils;
 using Properties.Infrastructure.Logging;
 using Serilog;
-using System;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,7 +82,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Estudio API", Version = "v1" });
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Properties API", Version = "v1" });
 
     // Configuración del esquema de seguridad JWT Bearer
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
