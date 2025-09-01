@@ -38,14 +38,14 @@ namespace Properties.API.Controllers
 
         [Authorize(Policy = "AdminOnly")]
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] OwnerCreateDto dto)
+        public async Task<IActionResult> Create([FromForm] OwnerCreateWithImageDto dto)
         {
             string? photoUrl = null;
             if (dto.Photo != null)
             {
                 var photoName = $"Owner_{dto.Identification}_{DateTime.Now:yyyyMMddHHmmssfff}";
                 await using var stream = dto.Photo.OpenReadStream();
-                photoUrl = await _photoService.UploadPhotoAsync(stream, photoName);
+                photoUrl = await _photoService.UploadPhotoAsync(stream, photoName, "owners");
             }
 
             var dtoToService = new OwnerDto

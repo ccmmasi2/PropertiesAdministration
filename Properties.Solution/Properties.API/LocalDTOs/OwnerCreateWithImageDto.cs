@@ -3,7 +3,7 @@ using static Properties.Contracts.Enums.Enumerators;
 
 namespace Properties.API.LocalDTOs
 {
-    public record OwnerCreateDto
+    public record OwnerCreateWithImageDto
     {
         [Required, MaxLength(200)]
         public string Name { get; init; } = default!;

@@ -13,7 +13,7 @@ namespace Properties.Infrastructure.Implementation.Utils
             _cloudinary = cloudinary;
         }
 
-        public async Task<string> UploadPhotoAsync(Stream file, string fileName)
+        public async Task<string> UploadPhotoAsync(Stream file, string fileName, string folderName)
         {
             if (file == null || file.Length == 0)
                 throw new InvalidOperationException("File is empty");
@@ -21,7 +21,7 @@ namespace Properties.Infrastructure.Implementation.Utils
             var uploadParams = new ImageUploadParams
             {
                 File = new FileDescription(fileName, file),
-                Folder = "owners" // Carpeta opcional en tu cuenta
+                Folder = folderName
             };
 
             var uploadResult = await _cloudinary.UploadAsync(uploadParams);

@@ -3,16 +3,56 @@
     "Name": "CasaVerde",
     "Address": "Calle 12 con Carrera 13",
     "Price": 304000000,
-    "CodeInternal": "01CasaVerde",
-    "Year": 2022,
+    "CodeInternal": "CasaVerde",
+    "Year": 2000,
     "IdOwner": 1
   },
   {
     "Name": "ElGuayacan",
     "Address": "Calle 14 con Carrera 15",
     "Price": 200000000,
-    "CodeInternal": "02ElGuayacan",
-    "Year": 2026,
+    "CodeInternal": "ElGuayacan",
+    "Year": 2001,
     "IdOwner": 2
+  },
+  {
+    "Name": "ElLaurel",
+    "Address": "Calle 15 con Carrera 15",
+    "Price": 100000000,
+    "CodeInternal": "ElLaurel",
+    "Year": 2002,
+    "IdOwner": 3
+  },
+  {
+    "Name": "LaVirginia",
+    "Address": "Calle 16 con Carrera 15",
+    "Price": 110000000,
+    "CodeInternal": "LaVirginia",
+    "Year": 2003,
+    "IdOwner": 4
+  },
+  {
+    "Name": "LaTormenta",
+    "Address": "Calle 17 con Carrera 15",
+    "Price": 130000000,
+    "CodeInternal": "LaTormenta",
+    "Year": 2004,
+    "IdOwner": 5
+  },
+  {
+    "Name": "ElRayo",
+    "Address": "Calle 18 con Carrera 15",
+    "Price": 150000000,
+    "CodeInternal": "ElRayo",
+    "Year": 2005,
+    "IdOwner": 6
+  },
+  {
+    "Name": "ElTrebol",
+    "Address": "Calle 19 con Carrera 15",
+    "Price": 180000000,
+    "CodeInternal": "ElTrebol",
+    "Year": 2006,
+    "IdOwner": 7
   }
-]
+] 

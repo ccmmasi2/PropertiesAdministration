@@ -2,6 +2,6 @@
 {
     public interface IPhotoService
     {
-        Task<string> UploadPhotoAsync(Stream file, string fileName);
+        Task<string> UploadPhotoAsync(Stream file, string fileName, string folderName);
     }
 }

@@ -32,6 +32,7 @@ namespace Properties.Infrastructure
 
             SeedOwners();
             SeedProperties();
+            SeedPropertyImages();
 
             if (_db.ChangeTracker.HasChanges())
                 _db.SaveChanges();
@@ -64,6 +65,21 @@ namespace Properties.Infrastructure
             {
                 var propertyEntities = properties.Select(b => new Property(b.Name, b.Address, b.Price, b.CodeInternal, b.Year, b.IdOwner)).ToList();
                 _db.Properties.AddRange(propertyEntities);
+            }
+        }
+
+        private void SeedPropertyImages()
+        {
+            if (_db.PropertyImages.Any()) return;
+
+            var filePath = Path.Combine(AppContext.BaseDirectory, "SeedData", "propertyImages.json");
+            var json = File.ReadAllText(filePath);
+            var propertyImages = JsonSerializer.Deserialize<List<PropertyImagesSeedDto>>(json);
+
+            if (propertyImages is not null)
+            {
+                var propertyImagesEntities = propertyImages.Select(b => new PropertyImage(b.File, b.Enable, b.IdProperty)).ToList();
+                _db.PropertyImages.AddRange(propertyImagesEntities);
             }
         }
     }
