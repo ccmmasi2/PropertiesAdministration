@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="SeedData\SeedDTO\" />
+    <None Remove="SeedData\owners.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="SeedData\owners.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

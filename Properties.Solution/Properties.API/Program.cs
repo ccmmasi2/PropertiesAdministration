@@ -68,6 +68,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite("Data Source=Properties.db"));
 
+
 // ========================
 // Dependences
 // ========================
@@ -102,6 +103,7 @@ builder.Services.AddControllers()
     {
         opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+
 
 // ========================
 // Swagger + JWT

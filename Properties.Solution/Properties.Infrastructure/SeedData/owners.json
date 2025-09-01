@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "Cristian",
+    "IdentificationType": "CC",
+    "Identification": "1122334455",
+    "Address": "Cra 15 con calle 12",
+    "Photo": "No image yet",
+    "BirthDay": "1986-07-15T00:00:00"
+  },
+  {
+    "Name": "Camilo",
+    "IdentificationType": "CC",
+    "Identification": "5544332211",
+    "Address": "calle 12 con Cra 15",
+    "Photo": "https://res.cloudinary.com/dmqb78p1s/image/upload/v1756570987/owners/ef4kdufgi0u78misyfx0.jpg",
+    "BirthDay": "1987-07-16T00:00:00"
+  }
+]

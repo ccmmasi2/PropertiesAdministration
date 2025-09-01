@@ -26,7 +26,8 @@ namespace Properties.Infrastructure.Implementation
                      IdentificationType = x.IdentificationType,
                      Identification = x.Identification,
                      Address = x.Address,
-                     Photo = x.Photo
+                     Photo = x.Photo,
+                     BirthDay = x.BirthDay
                  }).ToListAsync();
             return dtos;
         }
@@ -42,7 +43,8 @@ namespace Properties.Infrastructure.Implementation
                     IdentificationType = x.IdentificationType,
                     Identification = x.Identification,
                     Address = x.Address,
-                    Photo = x.Photo
+                    Photo = x.Photo,
+                    BirthDay = x.BirthDay
                 })
                 .FirstOrDefaultAsync();
 
