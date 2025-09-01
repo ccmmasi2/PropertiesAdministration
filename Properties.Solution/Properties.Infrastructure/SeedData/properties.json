@@ -1,0 +1,18 @@
+[
+  {
+    "Name": "CasaVerde",
+    "Address": "Calle 12 con Carrera 13",
+    "Price": 304000000,
+    "CodeInternal": "01CasaVerde",
+    "Year": 2022,
+    "IdOwner": 1
+  },
+  {
+    "Name": "ElGuayacan",
+    "Address": "Calle 14 con Carrera 15",
+    "Price": 200000000,
+    "CodeInternal": "02ElGuayacan",
+    "Year": 2026,
+    "IdOwner": 2
+  }
+]

@@ -9,6 +9,7 @@ namespace Estudio.Infrastructure.SeedData.SeedDTO
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public IdentificationType IdentificationType { get; set; } = default!;
+
         public string Identification { get; set; } = default!;
         public string Address { get; set; } = default!;
         public string Photo { get; set; } = default!;
