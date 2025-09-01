@@ -1,0 +1,405 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*header*/
+
+header {
+  display: flex;
+  align-items: center;
+  padding-left: 20%;
+}
+
+.separator {
+  border-top: 1px solid #ccc;  
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+
+.navbar-brand {
+  padding-top: 10px;
+}
+
+.label {
+  color: rgba(108, 110, 113, 1);
+  align-items: center;
+  cursor: pointer;
+  justify-content: baseline;
+}
+
+.mat-icon {
+  color: rgba(108, 110, 113, 1);
+} 
+
+.select-container-intern {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-container select {
+  width: 200px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  appearance: none; 
+  cursor: pointer;
+}
+
+.select-container::after {
+  content: '\25BC';  
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.select-container select:hover {
+  border: 1px solid #555;
+}
+
+.select-container select:focus {
+  outline: none;
+  border: 1px solid #007bff;  
+}
+
+/*header*/
+
+/*bread-crumb*/
+
+.text-principal {
+  color: var(--brand-green-seleccionado, #018b3f);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;  
+  padding-right: 9px;
+  cursor: pointer;
+}
+
+.text-secundary {
+  padding-left: 9px;
+}
+
+/*bread-crumb*/
+
+/*home*/
+
+.home-info {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ 
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #666;
+}
+
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/*home*/
+
+/*footer*/
+
+.contain-footer {
+  display: flex;
+  padding-top: 24px;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  flex-shrink: 0;
+} 
+
+.button {
+  height: 48px;
+  padding: 12px 16px;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid var(--color-text-success, #00b400);
+  background: var(--color-white, #fff);
+  color: var(--color-text-success, #00b400);
+  border-radius: 16px;
+}
+
+.button:not(:disabled):hover {
+  background: var(--color-green-selected, #034d24);
+  color: var(--color-white, #fff);
+} 
+
+.button:hover {
+  background: var(--color-green-selected, #034d24);
+  color: var(--color-white, #fff);
+}
+
+/*footer*/
+
+
+/*head*/
+.contain-head {
+  text-align: justify;  
+  margin-top: 20px; 
+}
+
+.contain-title {
+  font-size: 24px;  
+  font-weight: bold;  
+  font-family: "Arial", sans-serif;  
+  margin-bottom: 20px; 
+  text-align: center;
+}
+
+.breadcrumbs {
+  font-size: 18px; 
+  font-family: "Times New Roman", serif;  
+}
+/*head*/
+
+
+/*table*/
+.custom-table {
+  width: 100%;
+  border: 1px solid #ccc;  
+  border-collapse: collapse;  
+}
+
+.custom-table th, .custom-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.custom-table th {
+  background-color: #f2f2f2; 
+  border-bottom: 1px solid #ccc; 
+}
+
+.custom-table tr:nth-child(even) {
+  background-color: #f9f9f9;  
+}
+
+/*table*/
+
+/*bodyContent*/
+
+.bodyContent {
+  margin-top: 20px; 
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end; 
+}
+
+/*bodyContent*/
+
+
+/*modal-actions*/
+
+.triangle::before {
+  content: "";
+  position: absolute;
+  top: 30%;  
+  right: 0px; 
+  border-width: 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent #000;  
+}
+
+.containerModal {
+  width: 170px;
+  height: 80px;
+  margin: 10px 20px 10px 20px;
+}
+
+.divContainerButton {
+  margin: 10px;  
+}
+
+.buttonActions {
+  cursor: pointer;
+}
+
+/*modal-actions*/
+
+.cellValue {
+  width: 20px;
+  text-align: center;
+  padding-left: 20px;
+}
+
+.cellValueResult {
+  width: 30px;
+  text-align: center;
+  padding-left: 20px;
+}
+
+
+.price-cell {
+  text-align: right;
+}
+
+.numberfield {
+  width: 40px;
+}
+
+.error-border {
+  background-color: #cfbfbf; 
+}
+
+
+/*alert*/.alert {
+  padding: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.alert.success {
+  background-color: #4CAF50; 
+  color: white;
+}
+
+.alert.warning {
+  background-color: #ff9800;  
+  color: white;
+}
+
+.alert.error {
+  background-color: #f44336;  
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+/*alert*/
+
+.Totals {
+  margin-top: 20px; 
+}
+
+/*order form*/
+/* Estilos generales */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+} 
+
+.labelText {
+  font-weight: bold;
+}
+
+.inputText {
+  width: 50%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+} 
+
+/*order form*/
+
+.inputText.required:invalid {
+  border-color: red;
+}
+
+#addEdit {
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+
+#addEdit.collapsed {
+  max-height: 0;
+}
+
+#addEdit.expanded {
+  max-height: 1000px; /* Ajusta este valor según el tamaño del contenido */
+}
+
+.form-group ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+  position: absolute;
+  width: 100%;
+  z-index: 1000; /* Asegúrate de que la lista esté sobre otros elementos */
+}
+
+.form-group li {
+  padding: 8px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+.form-group li:last-child {
+  border-bottom: none;
+}
+
+.form-group li:hover {
+  background-color: #f0f0f0;
+}

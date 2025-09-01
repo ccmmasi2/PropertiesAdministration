@@ -1,0 +1,8 @@
+
+<ng-container *ngIf="alertMessage || alertType">
+  <app-show-message [message]="alertMessage" [type]="alertType"></app-show-message>
+</ng-container>
+
+<app-header></app-header>
+<div class="separator"></div>
+<app-mainpage></app-mainpage>

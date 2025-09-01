@@ -1,0 +1,142 @@
+<!-- 
+<div class="mat-app-backgroud basic-container">
+	<div class="contain-main">
+		<div class="contain-head">
+			<div class="contain-title button" (click)="toggleCollapse()">Click para ver, añadir o modificar beneficiarios {{ employeeURLInformation }}</div> 
+		</div>
+		<div class="contain-body">
+			<div id="addEdit" [class.collapsed]="isCollapsed" [class.expanded]="!isCollapsed">
+				<div class="contain-table">
+					<div class="form-container">
+						<form #beneficiaryForm="ngForm">  
+                
+							<div class="form-group">
+								<label class="labelText" title="Autocompletar, escriba una letra">Empleado:</label> 
+								<input type="text" title="Autocompletar, escriba una letra" 
+								[(ngModel)]="searchEmployeeTerm" (ngModelChange)="onSearchChange()" 
+								(blur)="clearResults()" name="searchEmployeeTerm" [disabled]="isSearchEmployeeTermDisabled">
+								<ul *ngIf="employeeResults.length">
+									<li *ngFor="let employee of employeeResults" 
+										(click)="selectEmployee(employee)">{{ employee.name }} {{ employee.lastName }} - {{ employee.id }}
+									</li>
+								</ul>
+							</div> 
+                
+							<div class="form-group">
+								<label class="labelText" for="selectCountryId">Nacionalidad:</label> 
+								<div class="select-container-intern">
+									<div class="select-container">
+									  <select id="selectCountryId" 
+											  name="selectCountryId"
+											  placeholder="CountryId" 
+											  [(ngModel)]="selectCountryId" 
+											  required
+											  #countryIdField="ngModel"
+											  [ngClass]="{ 'select-container': true, 'ng-invalid': countryIdField.invalid && (countryIdField.dirty || countryIdField.touched) }">
+										<option *ngFor="let option of countryIdOptions" 
+												[value]="option.id">{{ option.name }}</option>
+									  </select>
+								  </div>
+								</div>
+							</div>  
+
+							<div class="form-group">
+								<label class="labelText" for="name">Nombre:</label>
+								<input class="inputText" 
+								type="text"
+								id="name" 
+								name="name" 
+								[(ngModel)]="name"
+								maxlength="50"
+								required
+								#nameField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': nameField.invalid && (nameField.dirty || nameField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="lastName">Apellido:</label>
+								<input class="inputText" 
+								type="text" 
+								id="lastName" 
+								name="lastName" 
+								[(ngModel)]="lastName"
+								maxlength="50"
+								required
+								#lastNameField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': lastNameField.invalid && (lastNameField.dirty || lastNameField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="birthDay">Fecha de nacimiento:</label>
+								<input class="inputText" 
+								type="date" 
+								id="birthDay" 
+								name="birthDay" 
+								[(ngModel)]="birthDay"
+								required
+								#birthDayField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': birthDayField.invalid && (birthDayField.dirty || birthDayField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="curp">CURP:</label>
+								<input class="inputText" 
+								type="text" 
+								id="curp" 
+								name="curp" 
+								[(ngModel)]="curp"
+								maxlength="10"
+								required
+								#curpField="ngModel"
+								appNumericInput
+								[ngClass]="{ 'inputText': true, 'ng-invalid': curpField.invalid && (curpField.dirty || curpField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="ssn">SSN:</label>
+								<input class="inputText" 
+								type="text" 
+								id="ssn" 
+								name="ssn" 
+								[(ngModel)]="ssn"
+								maxlength="10"
+								required
+								#ssnField="ngModel"
+								appNumericInput
+								[ngClass]="{ 'inputText': true, 'ng-invalid': ssnField.invalid && (ssnField.dirty || ssnField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="phoneNumber">Número telefónico:</label>
+								<input class="inputText" 
+								type="text" 
+								id="phoneNumber" 
+								name="phoneNumber" 
+								[(ngModel)]="phoneNumber"
+								appNumericInput
+								maxlength="10">
+							</div> 
+							
+							<div class="form-group">
+								<label class="labelText" for="participationPercentaje">Porcentaje de participación:</label>
+								<input class="inputText" 
+								type="text" 
+								id="participationPercentaje" 
+								name="participationPercentaje" 
+								[(ngModel)]="participationPercentaje"
+								appPercentajeInput
+								maxlength="10"
+								(blur)="validateParticipationTotal()">
+							</div> 
+							
+						</form>
+						<button class="button" type="submit" (click)="submitForm()" *ngIf="activateSubmitButton">Submit</button>
+						<button class="button" (click)="resetForm()">Clear</button>
+					</div>
+				</div>
+			</div>
+			<div class="separator"></div>
+			<app-beneficiary-list></app-beneficiary-list>
+		</div>
+	</div>
+</div> -->

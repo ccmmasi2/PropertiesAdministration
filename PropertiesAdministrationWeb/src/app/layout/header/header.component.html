@@ -1,0 +1,25 @@
+<header>
+    <nav class="navbar">
+      <div>
+        <h2>Propiedades y Propietarios</h2>
+      </div>
+      <button
+        mat-button
+        [routerLink]="['']"
+        routerLinkActive="router-link-active"
+        (click)="onHomeButtonClick()"
+        class="button"
+        >
+        <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
+        <label class="label">Home</label>
+      </button>
+      <div class="select-container">
+        <select id="selectOption" (change)="onOptionChange($event)">
+          <option value="1">Seleccione una opción</option>
+          <option value="2">Owners</option>
+          <option value="3">Properties</option>
+        </select>
+      </div>
+    </nav>
+  </header> 
+  
