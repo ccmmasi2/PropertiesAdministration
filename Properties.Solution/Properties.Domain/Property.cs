@@ -1,4 +1,7 @@
-﻿namespace Properties.Domain
+﻿using System.Diagnostics;
+using static Properties.Contracts.Enums.Enumerators;
+
+namespace Properties.Domain
 {
     public class Property
     {
@@ -18,6 +21,16 @@
         protected Property() { }
 
         public Property(string name, string address, decimal price, string codeInternal, int year, int idOwner)
+        {
+            Name = name;
+            Address = address;
+            Price = price;
+            CodeInternal = codeInternal;
+            Year = year;
+            IdOwner = idOwner;
+        }
+
+        public void Update(string name, string address, decimal price, string codeInternal, int year, int idOwner)
         {
             Name = name;
             Address = address;

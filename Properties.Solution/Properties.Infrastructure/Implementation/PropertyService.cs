@@ -113,5 +113,35 @@ namespace Properties.Infrastructure.Implementation
 
             return (properties, totalCount);
         }
+
+        public async Task<string> Delete(int id)
+        {
+            var property = await _db.Properties.FindAsync(id);
+            if (property is null)
+                return $"Propiedad con el ID {id} no existe";
+
+            _db.Properties.Remove(property);
+            await _db.SaveChangesAsync();
+            return $"Propiedad con ID {id} eliminada correctamente";
+        }
+
+        public async Task<string> Update(PropertyDto dto)
+        {
+            var property = await _db.Properties.FindAsync(dto.IdProperty);
+            if (property is null)
+                throw new NotFoundException($"Propiedad con ID {dto.IdProperty} no encontrada.");
+
+            var exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
+            if (exists)
+                throw new InvalidOperationException($"Ya existe una propiedad con el código interno {dto.CodeInternal}.");
+
+            property.Update(dto.Name, dto.Address, dto.Price, dto.CodeInternal, dto.Year, dto.IdOwner);
+
+            _db.Properties.Update(property);
+            await _db.SaveChangesAsync();
+
+            return $"Propiedad con ID {dto.IdProperty} actualizada correctamente.";
+        }
+
     }
 }

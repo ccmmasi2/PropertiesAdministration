@@ -141,7 +141,7 @@ export class ApiConnectionService {
     sizePage: number,
     sorting: string
   ): Observable<{ totalRecords: number, currentPage: number, sizePage: number, sorting: number, data: PropertyDTO[] }> {
-    let url = `${this.baseUrl}/api/Property/ObtAllXEmployeeId?ownerId=${ownerId}&page=${page}&sizePage=${sizePage}`;
+    let url = `${this.baseUrl}/api/Property/ObtAllXOwnerId?ownerId=${ownerId}&page=${page}&sizePage=${sizePage}`;
     
     if(sorting) {
       url += `&sorting=${sorting}`;

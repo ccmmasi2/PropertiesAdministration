@@ -120,7 +120,7 @@ namespace Properties.API.Controllers
         {
             if (owner == null || owner.IdOwner == 0)
             {
-                _logger.LogError("Employee data or ID must be provided!");
+                _logger.LogError("Owner data or ID must be provided!");
                 return BadRequest("No se enviaron datos");
             }
 
