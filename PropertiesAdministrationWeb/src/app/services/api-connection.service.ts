@@ -33,7 +33,7 @@ export class ApiConnectionService {
           sizePage: response.pageSize,
           sorting: response.sorting,
           totalRecords: response.totalCount,
-          data: response.data
+          data: response.items
         };
       }),
       catchError((error: any) => {

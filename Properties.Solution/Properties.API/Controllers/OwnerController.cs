@@ -21,23 +21,25 @@ namespace Properties.API.Controllers
             _service = service;
             _photoService = photoService;
             _logger = logger;
-        }
+        } 
 
         [Authorize(Policy = "AdminOnly")]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var owners = await _service.GetAllAsync();
-            return Ok(owners);
-        }
-
-        [Authorize(Policy = "AdminOnly")]
-        [HttpGet("ObtAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<object>>> GetAll(int page = 1, int sizePage = 10, string sorting = "IdOwner")
         {
+            var (items, totalCount) = await _service.GetAll(page, sizePage, sorting);
+
             var LItems = await _service.GetAll(page, sizePage, sorting);
-            return Ok(LItems);
+
+            return Ok(new
+            {
+                page,
+                sizePage,
+                sorting,
+                totalCount,
+                items
+            });
         }
 
         [Authorize(Policy = "AdminOnly")]

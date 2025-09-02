@@ -15,23 +15,7 @@ namespace Properties.Infrastructure.Implementation
         public OwnerService(AppDbContext db, ITraceLogger logger)
         {
             _db = db;
-        }
-
-        public async Task<List<OwnerDto>> GetAllAsync()
-        {
-            var dtos = await _db.Owners
-                 .Select(x => new OwnerDto
-                 {
-                     IdOwner = x.IdOwner,
-                     Name = x.Name,
-                     IdentificationType = x.IdentificationType,
-                     Identification = x.Identification,
-                     Address = x.Address,
-                     Photo = x.Photo,
-                     BirthDay = x.BirthDay
-                 }).ToListAsync();
-            return dtos;
-        }
+        } 
 
         public async Task<OwnerDto?> GetByIdAsync(int id)
         {

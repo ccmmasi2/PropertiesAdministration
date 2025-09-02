@@ -15,7 +15,7 @@ import { ReactiveSharedService } from '@app/services/reactive-shared.service';
 
 export class OwnerListComponent implements OnInit {
   displayedColumns: string[] = [
-    'ownerId',
+    'idOwner',
     'identificationType',
     'identification',
     'name',

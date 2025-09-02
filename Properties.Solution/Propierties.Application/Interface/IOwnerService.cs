@@ -5,7 +5,6 @@ namespace Properties.Application.Interface
     public interface IOwnerService
     {
         Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto);
-        Task<List<OwnerDto>> GetAllAsync();
         Task<OwnerDto?> GetByIdAsync(int id);
         Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term);
         Task<string> Delete(Int64 id);
