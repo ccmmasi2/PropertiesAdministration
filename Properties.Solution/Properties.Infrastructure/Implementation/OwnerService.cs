@@ -99,5 +99,46 @@ namespace Properties.Infrastructure.Implementation
 
             return owners;
         }
+
+        public async Task<string> Delete(Int64 id)
+        {
+            var owner = await _db.Owners.FindAsync(id);
+
+            if (owner is null)
+                return $"Propietario con el ID {id} no existe";
+
+            _db.Owners.Remove(owner);
+            await _db.SaveChangesAsync();
+
+            return $"Propietario con ID {id} eliminado correctamente";
+        }
+
+        public async Task<string> Update(OwnerDto dto)
+        {
+            var owner = await _db.Owners.FindAsync(dto.IdOwner);
+            if (owner is null)
+                throw new NotFoundException($"Propietario con ID {dto.IdOwner} no encontrado.");
+
+            var exists = await _db.Owners
+                .AnyAsync(x => x.Identification.ToLower() == dto.Identification.ToLower()
+                               && x.IdOwner != dto.IdOwner);
+            if (exists)
+                throw new InvalidOperationException($"Ya existe un propietario con la identificación {dto.Identification}.");
+
+            var resultDto = new OwnerDto
+            {
+                Name = owner.Name,
+                IdentificationType = owner.IdentificationType,
+                Identification = owner.Identification,
+                Address = owner.Address,
+                Photo = owner.Photo,
+                BirthDay = owner.BirthDay
+            };
+
+            _db.Owners.Update(owner);
+            await _db.SaveChangesAsync();
+
+            return $"Propietario con ID {dto.IdOwner} actualizado correctamente.";
+        }
     }
 }

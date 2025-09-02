@@ -7,6 +7,7 @@ import { PropertyListComponent } from './property-list/property-list.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { MaterialModule } from 'app/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { NumericInputDirective } from '@app/rules/numeric-input.directive';
 
 @NgModule({
   imports: [
@@ -19,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     OwnerFormComponent,
     OwnerListComponent, 
     PropertyFormComponent, 
-    PropertyListComponent]
+    PropertyListComponent,
+    NumericInputDirective 
+  ]
 })
 
 export class CatalogModule { }

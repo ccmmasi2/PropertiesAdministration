@@ -118,16 +118,16 @@ export class ApiConnectionService {
     })
     .pipe(
       map(response => {
-        return 'Owner actualizado correctamente';
+        return 'Propietario actualizado correctamente';
       }),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = 'Error al actualizar Owner';
+        let errorMessage = 'Error al actualizar el propietario';
         if (error.error instanceof ErrorEvent) {
           console.error('An error occurred:', error.error.message);
         } else {
           console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
           if (error.status === 409) {  
-            errorMessage = 'Error: El número de Owner ya existe.';
+            errorMessage = 'Error: La identificación del propietario ya existe.';
           }
         }
         return throwError(errorMessage);
@@ -139,8 +139,8 @@ export class ApiConnectionService {
     const url = `${this.baseUrl}/api/Owner/${id}`;
     return this.http.delete<string>(url, { responseType: 'text' as 'json' }).pipe(
       catchError((error: any) => {
-        console.error('Error eliminando owner:', error);
-        return throwError(() => new Error('Error eliminando owner: ' + (error.message || error)));
+        console.error('Error eliminando el propietario:', error);
+        return throwError(() => new Error('Error eliminando propietario: ' + (error.message || error)));
       })
     ) 
   } 

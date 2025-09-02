@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Properties.API.LocalDTOs;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
@@ -13,11 +14,13 @@ namespace Properties.API.Controllers
     {
         private readonly IOwnerService _service;
         private readonly IPhotoService _photoService;
+        private readonly ILogger<OwnerController> _logger;
 
-        public OwnerController(IOwnerService service, IPhotoService photoService)
+        public OwnerController(IOwnerService service, IPhotoService photoService, ILogger<OwnerController> logger)
         {
             _service = service;
             _photoService = photoService;
+            _logger = logger;
         }
 
         [Authorize(Policy = "AdminOnly")]
@@ -71,6 +74,47 @@ namespace Properties.API.Controllers
                 return Ok(result);
             }
             return NotFound("No se encontraron empleados con el filtro");
+        }
+
+        [HttpDelete("Delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> Delete(Int64 id)
+        {
+            if (id == 0)
+            {
+                return BadRequest("ID invalido");
+            }
+
+            var result = await _service.Delete(id);
+            return Ok(result);
+        }
+
+        [HttpPut("Update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> Update([FromBody] OwnerDto owner)
+        {
+            if (owner == null || owner.IdOwner == 0)
+            {
+                _logger.LogError("Employee data or ID must be provided!");
+                return BadRequest("No se enviaron datos");
+            }
+
+            try
+            {
+                var result = await _service.Update(owner);
+                return Ok(result);
+            }
+            catch (SqlException ex) when (ex.Number == 2601 || ex.Number == 2627)
+            {
+                return Conflict("La identificación del propietario ya existe.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error updating owner: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

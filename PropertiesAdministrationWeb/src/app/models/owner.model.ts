@@ -7,5 +7,5 @@ export class OwnerDTO {
     identification: string = '';
     address: string = '';
     photo: string = '';
-    birthDay: Date;
+    birthDay: string = '';
 } 

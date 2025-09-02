@@ -8,5 +8,7 @@ namespace Properties.Application.Interface
         Task<List<OwnerDto>> GetAllAsync();
         Task<OwnerDto?> GetByIdAsync(int id);
         Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term);
+        Task<string> Delete(Int64 id);
+        Task<string> Update(OwnerDto dto);
     }
 }

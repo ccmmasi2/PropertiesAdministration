@@ -10,11 +10,11 @@ import { PropertyDTO } from '../models/property.model';
 })
 
 export class ReactiveSharedService {
-  private employeesSource = new BehaviorSubject<{ 
+  private ownersSource = new BehaviorSubject<{ 
     totalRecords: number, 
     data: OwnerDTO[] 
   }>({ totalRecords: 0, data: [] });
-  employees$ = this.employeesSource.asObservable();
+  owners$ = this.ownersSource.asObservable();
   
   private beneficiarySource = new BehaviorSubject<{
      totalRecords: number, 
@@ -24,13 +24,13 @@ export class ReactiveSharedService {
 
   constructor(private apiService: ApiConnectionService) {}
 
-  getEmployees(page: number = 1, sizePage: number = 10, sorting: string = ''): void {
+  getOwners(page: number = 1, sizePage: number = 10, sorting: string = ''): void {
     this.apiService.getOwners(page, sizePage, sorting).subscribe({
-      next:  response => this.employeesSource.next({ 
+      next:  response => this.ownersSource.next({ 
         totalRecords: response.totalRecords, 
         data: response.data
       }),
-      error: error => console.error('Error cargando empleados', error)
+      error: error => console.error('Error cargando los propietarios', error)
     });
   } 
 
