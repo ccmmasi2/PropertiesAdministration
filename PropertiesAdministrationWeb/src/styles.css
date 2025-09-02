@@ -12,7 +12,7 @@ header {
 }
 
 .separator {
-  border-top: 1px solid #ccc;  
+  border-top: 5px solid #cccccc00;  
 }
 
 .navbar {
@@ -239,8 +239,8 @@ a:hover {
 }
 
 .containerModal {
-  width: 170px;
-  height: 80px;
+  width: 140px;
+  height: 90px;
   margin: 10px 20px 10px 20px;
 }
 
@@ -250,6 +250,9 @@ a:hover {
 
 .buttonActions {
   cursor: pointer;
+  display: flex;
+  align-items: center;  
+  gap: 6px;
 }
 
 /*modal-actions*/

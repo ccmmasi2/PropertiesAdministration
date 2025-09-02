@@ -77,8 +77,8 @@ export class OwnerListComponent implements OnInit {
 
   openActionsDialog(event: MouseEvent, row: any) {
     const ownerObject: OwnerDTO = row as OwnerDTO;
-    const offsetX = 240;
-    const offsety = 35;
+    const offsetX = 250;
+    const offsety = 9;
     this.dialog.open(ActionsDialogComponent, {
       data: { dataId: ownerObject.idOwner },
       position: {
