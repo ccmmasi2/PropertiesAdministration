@@ -16,11 +16,11 @@ export class ReactiveSharedService {
   }>({ totalRecords: 0, data: [] });
   owners$ = this.ownersSource.asObservable();
   
-  private beneficiarySource = new BehaviorSubject<{
+  private propertiesSource = new BehaviorSubject<{
      totalRecords: number, 
      data: PropertyDTO[] 
     }>({ totalRecords: 0, data: [] });
-  beneficiaries$ = this.beneficiarySource.asObservable();
+  properties$ = this.propertiesSource.asObservable();
 
   constructor(private apiService: ApiConnectionService) {}
 
@@ -34,23 +34,23 @@ export class ReactiveSharedService {
     });
   } 
 
-  // getBeneficiaries(page: number = 1, sizePage: number = 10, sorting: string = ''): void {
-  //   this.apiService.getProperties(page, sizePage, sorting).subscribe({
-  //     next:  response => this.beneficiarySource.next({ 
-  //       totalRecords: response.totalRecords, 
-  //       data: response.data
-  //      }),
-  //     error: error => console.error('Error cargando beneficiarios', error)
-  //   });
-  // } 
+  getProperties(page: number = 1, sizePage: number = 10, sorting: string = ''): void {
+    this.apiService.getProperties(page, sizePage, sorting).subscribe({
+      next:  response => this.propertiesSource.next({ 
+        totalRecords: response.totalRecords, 
+        data: response.data
+      }),
+      error: error => console.error('Error cargando los propietarios', error)
+    });
+  }  
 
-  getBeneficiariesByEmployeeId(employeeId: number, page: number = 1, sizePage: number = 10, sorting: string = ''): void {
-    this.apiService.getPropertiesByOwnerid(employeeId, page, sizePage, sorting).subscribe({
-      next:  response => this.beneficiarySource.next({
+  getPropertiesByOwnerId(ownerId: number, page: number = 1, sizePage: number = 10, sorting: string = ''): void {
+    this.apiService.getPropertiesByOwnerid(ownerId, page, sizePage, sorting).subscribe({
+      next:  response => this.propertiesSource.next({
           totalRecords: response.totalRecords,
           data: response.data 
         }),
-      error: error => console.error('Error cargando beneficiarios', error)
+      error: error => console.error('Error cargando propiedades', error)
     });
   }  
 }

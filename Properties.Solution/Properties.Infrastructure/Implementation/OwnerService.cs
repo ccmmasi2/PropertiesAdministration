@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Properties.Application.Exceptions;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;

@@ -35,7 +35,7 @@ export class ActionsDialogComponent implements OnInit {
   }
  
   invokeWatchBeneficiariesClickEvent() {
-    this.eventService.emitWatchBeneficiariesButtonClick(this.dataId);
+    this.eventService.emitWatchPropertiesButtonClick(this.dataId);
     this.dialogRef.close(); 
   }
 }

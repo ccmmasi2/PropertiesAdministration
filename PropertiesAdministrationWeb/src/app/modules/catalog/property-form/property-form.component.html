@@ -1,1 +1,98 @@
-<p>property-form works!</p>
+
+<div class="mat-app-backgroud basic-container">
+	<div class="contain-main">
+		<div class="contain-head">
+			<div class="contain-title button" (click)="toggleCollapse()">Click para ver, añadir o modificar propiedades {{ ownerURLInformation }}</div> 
+		</div>
+		<div class="contain-body">
+			<div id="addEdit" [class.collapsed]="isCollapsed" [class.expanded]="!isCollapsed">
+				<div class="contain-table">
+					<div class="form-container">
+						<form #propertyForm="ngForm">  
+                
+							<div class="form-group">
+								<label class="labelText" title="Autocompletar, escriba una letra">Propietario:</label> 
+								<input type="text" title="Autocompletar, escriba una letra" 
+								[(ngModel)]="searchOwnerTerm" (ngModelChange)="onSearchChange()" 
+								(blur)="clearResults()" name="searchOwnerTerm" [disabled]="isSearchOwnerTermDisabled">
+								<ul *ngIf="ownerResults.length">
+									<li *ngFor="let owner of ownerResults" 
+										(click)="selectOwner(owner)">{{ owner.name }} - {{ owner.idOwner }}
+									</li>
+								</ul>
+							</div> 
+
+							<div class="form-group">
+								<label class="labelText" for="name">Nombre:</label>
+								<input class="inputText" 
+								type="text"
+								id="name" 
+								name="name" 
+								[(ngModel)]="name"
+								maxlength="200"
+								required
+								#nameField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': nameField.invalid && (nameField.dirty || nameField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="address">Dirección:</label>
+								<input class="inputText" 
+								type="text" 
+								id="address" 
+								name="address" 
+								[(ngModel)]="address"
+								maxlength="50"
+								required
+								#addressField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': addressField.invalid && (addressField.dirty || addressField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="codeInternal">Codigo interno:</label>
+								<input class="inputText" 
+								type="text" 
+								id="codeInternal" 
+								name="codeInternal" 
+								[(ngModel)]="codeInternal"
+								maxlength="50"
+								required
+								#codeInternalField="ngModel"
+								[ngClass]="{ 'inputText': true, 'ng-invalid': codeInternalField.invalid && (codeInternalField.dirty || codeInternalField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="price">Precio:</label>
+								<input class="inputText" 
+								type="number" 
+								id="price" 
+								name="price" 
+								[(ngModel)]="price"
+								required
+								#priceField="ngModel"
+								appNumericInput
+								[ngClass]="{ 'inputText': true, 'ng-invalid': priceField.invalid && (priceField.dirty || priceField.touched) }">
+							</div>
+							
+							<div class="form-group">
+								<label class="labelText" for="year">Año:</label>
+								<input class="inputText" 
+								type="number" 
+								id="year" 
+								name="year" 
+								[(ngModel)]="year"
+								appNumericInput
+								maxlength="4">
+							</div> 
+							
+						</form>
+						<button class="button" type="submit" (click)="submitForm()" *ngIf="activateSubmitButton">Submit</button>
+						<button class="button" (click)="resetForm()">Clear</button>
+					</div>
+				</div>
+			</div>
+			<div class="separator"></div>
+			<app-property-list></app-property-list>
+		</div>
+	</div>
+</div>

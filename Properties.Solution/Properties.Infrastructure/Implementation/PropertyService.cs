@@ -4,6 +4,7 @@ using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
 using Properties.Domain;
+using System.Linq.Dynamic.Core;
 
 namespace Properties.Infrastructure.Implementation
 {
@@ -14,27 +15,7 @@ namespace Properties.Infrastructure.Implementation
         public PropertyService(AppDbContext db, ITraceLogger logger)
         {
             _db = db;
-        }
-
-        public async Task<List<PropertyDto>> GetAllAsync()
-        {
-            var dtos = await _db.Properties
-                 .Select(x => new PropertyDto
-                 {
-                     IdProperty = x.IdProperty,
-                     Name = x.Name,
-                     Address = x.Address,
-                     Price = x.Price,
-                     CodeInternal = x.CodeInternal,
-                     Year = x.Year,
-
-                     IdOwner = x.IdOwner,
-                     OwnerIdentification = x.Owner.Identification,
-                     OwnerIdentificationType = x.Owner.IdentificationType,
-                     OwnerName = x.Owner.Name
-                 }).ToListAsync();
-            return dtos;
-        }
+        } 
 
         public async Task<PropertyDto?> GetByIdAsync(int id)
         {
@@ -100,6 +81,37 @@ namespace Properties.Infrastructure.Implementation
                 .FirstAsync();
 
             return resultDto;
-        } 
+        }
+
+        public async Task<(IEnumerable<PropertyDto> Items, int TotalCount)> GetAllXOwnerId(int ownerId, int page, int sizePage, string sorting)
+        {
+            var query = _db.Properties.AsQueryable();
+
+            var totalCount = await query.CountAsync();
+
+            query = query.OrderBy(sorting);
+
+            var properties = await query
+                .Skip((page - 1) * sizePage)
+                .Take(sizePage)
+                .Where(x => x.IdOwner == ownerId)
+                .Select(p => new PropertyDto
+                {
+                    IdProperty = p.IdProperty,
+                    Name = p.Name,
+                    Address = p.Address,
+                    Price = p.Price,
+                    CodeInternal = p.CodeInternal,
+                    Year = p.Year,
+
+                    IdOwner = p.IdOwner,
+                    OwnerIdentification = p.Owner.Identification,
+                    OwnerIdentificationType = p.Owner.IdentificationType,
+                    OwnerName = p.Owner.Name
+                })
+                .ToListAsync();
+
+            return (properties, totalCount);
+        }
     }
 }

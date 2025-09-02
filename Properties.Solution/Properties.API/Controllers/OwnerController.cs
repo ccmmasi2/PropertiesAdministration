@@ -7,7 +7,6 @@ using Properties.API.LocalDTOs;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
-using Properties.Domain;
 
 namespace Properties.API.Controllers
 {

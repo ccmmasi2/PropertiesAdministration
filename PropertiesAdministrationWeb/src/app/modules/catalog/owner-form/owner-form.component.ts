@@ -51,7 +51,7 @@ export class OwnerFormComponent implements OnInit {
     this.eventService.deleteButtonClick.subscribe((ownerId: number) => {
       this.deleteOwner(ownerId);
     });
-    this.eventService.watchBeneficiariesButtonClick.subscribe((ownerId: number) => {
+    this.eventService.watchPropertiesButtonClick.subscribe((ownerId: number) => {
       this.router.navigate(['system/properties/',  { ownerId: ownerId } ]);
     });
   }

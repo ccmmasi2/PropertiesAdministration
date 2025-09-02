@@ -10,18 +10,12 @@ namespace Properties.API.Controllers
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyService _service;
+        private readonly ILogger<PropertyController> _logger;
 
-        public PropertyController(IPropertyService service)
+        public PropertyController(IPropertyService service, ILogger<PropertyController> logger)
         {
             _service = service;
-        }
-
-        [Authorize(Policy = "AdminOnly")]
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
-        {
-            var properties = await _service.GetAllAsync();
-            return Ok(properties);
+            _logger = logger;
         }
 
         [Authorize(Policy = "AdminOnly")]
@@ -38,6 +32,16 @@ namespace Properties.API.Controllers
         {
             var created = await _service.CreateWithValidationAsync(dto);
             return CreatedAtAction(nameof(GetById), new { id = created.IdProperty }, created);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpGet("GetAllXOwnerId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<object>>> GetAllXOwnerId(int ownerId, int page = 1, int sizePage = 10, string sorting = "IdProperty")
+        {
+            _logger.LogInformation("Get list x Owner Id");
+            var LItems = await _service.GetAllXOwnerId(ownerId, page, sizePage, sorting);
+            return Ok(LItems);
         }
     }
 }
