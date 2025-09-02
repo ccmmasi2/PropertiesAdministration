@@ -135,7 +135,7 @@ export class ApiConnectionService {
     );
   } 
   
-  getPropertiesByOwnerid(
+  getPropertiesByOwnerId(
     ownerId: number,
     page: number,
     sizePage: number,
@@ -149,12 +149,13 @@ export class ApiConnectionService {
     
     return this.http.get<any>(url).pipe(
       map((response: any) => {
+        console.log('ccmmasi response.data ', response.data);
         return {
           currentPage: response.page,
           sizePage: response.pageSize,
           sorting: response.sorting,
           totalRecords: response.totalCount,
-          data: response.data
+          data: response.items
         };
       }),
       catchError((error: any) => {

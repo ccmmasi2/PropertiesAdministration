@@ -45,7 +45,7 @@ export class ReactiveSharedService {
   }  
 
   getPropertiesByOwnerId(ownerId: number, page: number = 1, sizePage: number = 10, sorting: string = ''): void {
-    this.apiService.getPropertiesByOwnerid(ownerId, page, sizePage, sorting).subscribe({
+    this.apiService.getPropertiesByOwnerId(ownerId, page, sizePage, sorting).subscribe({
       next:  response => this.propertiesSource.next({
           totalRecords: response.totalRecords,
           data: response.data 

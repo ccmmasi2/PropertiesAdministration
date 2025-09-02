@@ -147,8 +147,6 @@ namespace Properties.Infrastructure.Implementation
         {
             var query = _db.Properties.AsQueryable();
 
-            var totalCount = await query.CountAsync();
-
             query = query.OrderBy(sorting);
 
             var properties = await query
@@ -171,8 +169,9 @@ namespace Properties.Infrastructure.Implementation
                 })
                 .ToListAsync();
 
+            var totalCount = properties.Count();
+
             return (properties, totalCount);
         }
-
     }
 }

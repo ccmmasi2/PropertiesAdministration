@@ -60,8 +60,17 @@ namespace Properties.API.Controllers
         public async Task<ActionResult<IEnumerable<object>>> GetAllXOwnerId(int ownerId, int page = 1, int sizePage = 10, string sorting = "IdProperty")
         {
             _logger.LogInformation("Get list x Owner Id");
-            var LItems = await _service.GetAllXOwnerId(ownerId, page, sizePage, sorting);
-            return Ok(LItems);
+
+            var (items, totalCount) = await _service.GetAllXOwnerId(ownerId, page, sizePage, sorting);
+
+            return Ok(new
+            {
+                page,
+                sizePage,
+                sorting,
+                totalCount,
+                items
+            });
         }
 
         [Authorize(Policy = "AdminOnly")]
