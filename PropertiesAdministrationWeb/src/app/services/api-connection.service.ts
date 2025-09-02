@@ -15,7 +15,7 @@ export class ApiConnectionService {
   
   constructor(private http: HttpClient) {}
   
-  getOwners(
+  getOwners2(
     page: number,
     sizePage: number,
     sorting: string
@@ -42,63 +42,6 @@ export class ApiConnectionService {
       })
     );
   } 
-  
-  getProperties(
-    page: number,
-    sizePage: number,
-    sorting: string
-  ): Observable<{ totalRecords: number, currentPage: number, sizePage: number, sorting: number, data: OwnerDTO[] }> {
-    let url = `${this.baseUrl}/api/Property?page=${page}&sizePage=${sizePage}`;
-    
-    if(sorting) {
-      url += `&sorting=${sorting}`;
-    }
-    
-    return this.http.get<any>(url).pipe(
-      map((response: any) => {
-        return {
-          currentPage: response.page,
-          sizePage: response.pageSize,
-          sorting: response.sorting,
-          totalRecords: response.totalCount,
-          data: response.data
-        };
-      }),
-      catchError((error: any) => {
-        console.error('Error obteniendo properties:', error);
-        return throwError(() => new Error('Error obteniendo properties'));
-      })
-    );
-  } 
-  
-  getPropertiesByOwnerid(
-    ownerId: number,
-    page: number,
-    sizePage: number,
-    sorting: string
-  ): Observable<{ totalRecords: number, currentPage: number, sizePage: number, sorting: number, data: PropertyDTO[] }> {
-    let url = `${this.baseUrl}/api/Property/ObtAllXEmployeeId?ownerId=${ownerId}&page=${page}&sizePage=${sizePage}`;
-    
-    if(sorting) {
-      url += `&sorting=${sorting}`;
-    }
-    
-    return this.http.get<any>(url).pipe(
-      map((response: any) => {
-        return {
-          currentPage: response.page,
-          sizePage: response.pageSize,
-          sorting: response.sorting,
-          totalRecords: response.totalCount,
-          data: response.data
-        };
-      }),
-      catchError((error: any) => {
-        console.error('Error obteniendo properties:', error);
-        return throwError(() => new Error('Error obteniendo properties'));
-      })
-    );
-  }  
   
   createOwner(ownerRequest: OwnerDTO): Observable<OwnerDTO> {
     const url = `${this.baseUrl}/api/Owner`;
@@ -155,6 +98,73 @@ export class ApiConnectionService {
       catchError((error: any) => {
         console.error('Error obteniendo owner:', error);
         return throwError(() => new Error('Error obteniendo owner'));
+      })
+    );
+  } 
+  
+  getOwnersXFilter(searchTerm: string): Observable<OwnerDTO[]> {
+    const url = `${this.baseUrl}/api/Owner/ObtAllXFilter?term=${searchTerm}`;
+    return this.http.get<OwnerDTO[]>(url).pipe(
+      catchError(error => {
+        console.error('Error obteniendo empleados por filtro:', error);
+        return throwError(() => new Error('Error obteniendo empleados por filtro'));
+      })
+    );
+  }  
+  
+  getProperties(
+    page: number,
+    sizePage: number,
+    sorting: string
+  ): Observable<{ totalRecords: number, currentPage: number, sizePage: number, sorting: number, data: OwnerDTO[] }> {
+    let url = `${this.baseUrl}/api/Property?page=${page}&sizePage=${sizePage}`;
+    
+    if(sorting) {
+      url += `&sorting=${sorting}`;
+    }
+    
+    return this.http.get<any>(url).pipe(
+      map((response: any) => {
+        return {
+          currentPage: response.page,
+          sizePage: response.pageSize,
+          sorting: response.sorting,
+          totalRecords: response.totalCount,
+          data: response.data
+        };
+      }),
+      catchError((error: any) => {
+        console.error('Error obteniendo properties:', error);
+        return throwError(() => new Error('Error obteniendo properties'));
+      })
+    );
+  } 
+  
+  getPropertiesByOwnerid(
+    ownerId: number,
+    page: number,
+    sizePage: number,
+    sorting: string
+  ): Observable<{ totalRecords: number, currentPage: number, sizePage: number, sorting: number, data: PropertyDTO[] }> {
+    let url = `${this.baseUrl}/api/Property/ObtAllXEmployeeId?ownerId=${ownerId}&page=${page}&sizePage=${sizePage}`;
+    
+    if(sorting) {
+      url += `&sorting=${sorting}`;
+    }
+    
+    return this.http.get<any>(url).pipe(
+      map((response: any) => {
+        return {
+          currentPage: response.page,
+          sizePage: response.pageSize,
+          sorting: response.sorting,
+          totalRecords: response.totalCount,
+          data: response.data
+        };
+      }),
+      catchError((error: any) => {
+        console.error('Error obteniendo properties:', error);
+        return throwError(() => new Error('Error obteniendo properties'));
       })
     );
   }  
@@ -221,16 +231,6 @@ export class ApiConnectionService {
       catchError((error: any) => {
         console.error('Error obteniendo property:', error);
         return throwError(() => new Error('Error obteniendo property'));
-      })
-    );
-  } 
-  
-  getOwnersXFilter(searchTerm: string): Observable<OwnerDTO[]> {
-    const url = `${this.baseUrl}/api/Owner/ObtAllXFilter?term=${searchTerm}`;
-    return this.http.get<OwnerDTO[]>(url).pipe(
-      catchError(error => {
-        console.error('Error obteniendo empleados por filtro:', error);
-        return throwError(() => new Error('Error obteniendo empleados por filtro'));
       })
     );
   } 
