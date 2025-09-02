@@ -406,3 +406,18 @@ a:hover {
 .form-group li:hover {
   background-color: #f0f0f0;
 }
+
+
+.contain-table table {
+  border-collapse: collapse;  
+}
+
+.contain-table th,
+.contain-table td {
+  border: 1px solid #c3e6c3; 
+}
+
+.actions-column {
+  width: 150px; 
+  min-width: 120px;  
+}
