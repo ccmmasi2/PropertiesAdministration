@@ -22,8 +22,8 @@ export class OwnerFormComponent implements OnInit {
   cartItems: OwnerDTO[] = []; 
 
   ownerId: number = 0;
-  selectIdentificationType: number = 0;
-  identificationTypeOptions: { id: number; name: string }[] = [];
+  selectIdentificationType: string = '';
+  identificationTypeOptions: { id: string; name: string }[] = [];
   identification: string = '';
   name: string = '';
   address: string = '';
@@ -100,15 +100,13 @@ export class OwnerFormComponent implements OnInit {
 
   loadDataOptions(): void {
     this.identificationTypeOptions = [
-      {id: null, name: '-- Seleccione --' },
-      ...Object.keys(IdentificationType)
-      .filter(key => !isNaN(Number(IdentificationType[key as any]))) 
-      .map(key => ({
-        id: IdentificationType[key as keyof typeof IdentificationType],
-        name: key
+      { id: '', name: '-- Seleccione --' },
+      ...Object.values(IdentificationType).map(value => ({
+        id: value,
+        name: value
       }))
-    ]; 
-  }   
+    ];
+  }
 
   submitForm(): void {
     if (this.ownerForm.valid) {
@@ -174,7 +172,7 @@ export class OwnerFormComponent implements OnInit {
 
   public resetForm(): void {
     this.ownerId = 0;
-    this.selectIdentificationType = 0;
+    this.selectIdentificationType = '';
     this.identification = '';
     this.name = '';
     this.address = '';

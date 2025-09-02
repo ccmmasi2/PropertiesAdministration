@@ -1,9 +1,7 @@
-import { IdentificationType } from "./identificationType.model";
-
 export class OwnerDTO {
     idOwner: number = 0;
     name: string = '';
-    identificationType: IdentificationType = IdentificationType.CC;
+    identificationType: string = '';
     identification: string = '';
     address: string = '';
     photo: string = '';
