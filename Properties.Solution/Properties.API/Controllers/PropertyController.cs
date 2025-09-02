@@ -36,6 +36,25 @@ namespace Properties.API.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<object>>> GetAll(int page = 1, int sizePage = 10, string sorting = "IdProperty")
+        {
+            var (items, totalCount) = await _service.GetAll(page, sizePage, sorting);
+
+            var LItems = await _service.GetAll(page, sizePage, sorting);
+
+            return Ok(new
+            {
+                page,
+                sizePage,
+                sorting,
+                totalCount,
+                items
+            });
+        }
+
+        [Authorize(Policy = "AdminOnly")]
         [HttpGet("GetAllXOwnerId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<object>>> GetAllXOwnerId(int ownerId, int page = 1, int sizePage = 10, string sorting = "IdProperty")

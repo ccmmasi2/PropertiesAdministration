@@ -15,28 +15,6 @@ namespace Properties.Infrastructure.Implementation
         public OwnerService(AppDbContext db, ITraceLogger logger)
         {
             _db = db;
-        } 
-
-        public async Task<OwnerDto?> GetByIdAsync(int id)
-        {
-            var owner = await _db.Owners
-                .Where(x => x.IdOwner == id)
-                .Select(x => new OwnerDto
-                {
-                    IdOwner = x.IdOwner,
-                    Name = x.Name,
-                    IdentificationType = x.IdentificationType,
-                    Identification = x.Identification,
-                    Address = x.Address,
-                    Photo = x.Photo,
-                    BirthDay = x.BirthDay
-                })
-                .FirstOrDefaultAsync();
-
-            if (owner == null)
-                throw new NotFoundException($"Owner with ID {id} not found.");
-
-            return owner;
         }
 
         public async Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto)
@@ -60,28 +38,6 @@ namespace Properties.Infrastructure.Implementation
                 BirthDay = owner.BirthDay
             };
             return resultDto;
-        }
-
-        public async Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term)
-        {
-            var owners = await _db.Owners
-                   .Where(e =>
-                       e.Name.Contains(term) ||
-                       e.Identification.Contains(term)
-                   )
-                   .Select(x => new OwnerDto
-                   {
-                       IdOwner = x.IdOwner,
-                       Name = x.Name,
-                       IdentificationType = x.IdentificationType,
-                       Identification = x.Identification,
-                       Address = x.Address,
-                       Photo = x.Photo,
-                       BirthDay = x.BirthDay
-                   })
-                   .ToListAsync();
-
-            return owners;
         }
 
         public async Task<string> Delete(int id)
@@ -114,6 +70,7 @@ namespace Properties.Infrastructure.Implementation
             return $"Propietario con ID {dto.IdOwner} actualizado correctamente.";
         }
 
+
         public async Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting)
         {
             var query = _db.Owners.AsQueryable();
@@ -139,5 +96,50 @@ namespace Properties.Infrastructure.Implementation
 
             return (owners, totalCount);
         }
+        
+        public async Task<OwnerDto?> GetByIdAsync(int id)
+        {
+            var owner = await _db.Owners
+                .Where(x => x.IdOwner == id)
+                .Select(x => new OwnerDto
+                {
+                    IdOwner = x.IdOwner,
+                    Name = x.Name,
+                    IdentificationType = x.IdentificationType,
+                    Identification = x.Identification,
+                    Address = x.Address,
+                    Photo = x.Photo,
+                    BirthDay = x.BirthDay
+                })
+                .FirstOrDefaultAsync();
+
+            if (owner == null)
+                throw new NotFoundException($"Owner with ID {id} not found.");
+
+            return owner;
+        }
+
+        public async Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term)
+        {
+            var owners = await _db.Owners
+                   .Where(e =>
+                       e.Name.Contains(term) ||
+                       e.Identification.Contains(term)
+                   )
+                   .Select(x => new OwnerDto
+                   {
+                       IdOwner = x.IdOwner,
+                       Name = x.Name,
+                       IdentificationType = x.IdentificationType,
+                       Identification = x.Identification,
+                       Address = x.Address,
+                       Photo = x.Photo,
+                       BirthDay = x.BirthDay
+                   })
+                   .ToListAsync();
+
+            return owners;
+        }
+
     }
 }

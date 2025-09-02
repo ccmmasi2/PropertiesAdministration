@@ -15,32 +15,6 @@ namespace Properties.Infrastructure.Implementation
         public PropertyService(AppDbContext db, ITraceLogger logger)
         {
             _db = db;
-        } 
-
-        public async Task<PropertyDto?> GetByIdAsync(int id)
-        {
-            var property = await _db.Properties
-                .Where(x => x.IdProperty == id)
-                .Select(x => new PropertyDto
-                {
-                    IdProperty = x.IdProperty,
-                    Name = x.Name,
-                    Address = x.Address,
-                    Price = x.Price,
-                    CodeInternal = x.CodeInternal,
-                    Year = x.Year,
-
-                    IdOwner = x.IdOwner,
-                    OwnerIdentification = x.Owner.Identification,
-                    OwnerIdentificationType = x.Owner.IdentificationType,
-                    OwnerName = x.Owner.Name
-                })
-                .FirstOrDefaultAsync();
-
-            if (property == null)
-                throw new NotFoundException($"Property with ID {id} not found.");
-
-            return property;
         }
 
         public async Task<PropertyDto> CreateWithValidationAsync(PropertyDto dto)
@@ -83,6 +57,92 @@ namespace Properties.Infrastructure.Implementation
             return resultDto;
         }
 
+        public async Task<string> Delete(int id)
+        {
+            var property = await _db.Properties.FindAsync(id);
+            if (property is null)
+                return $"Propiedad con el ID {id} no existe";
+
+            _db.Properties.Remove(property);
+            await _db.SaveChangesAsync();
+            return $"Propiedad con ID {id} eliminada correctamente";
+        }
+
+        public async Task<string> Update(PropertyDto dto)
+        {
+            var property = await _db.Properties.FindAsync(dto.IdProperty);
+            if (property is null)
+                throw new NotFoundException($"Propiedad con ID {dto.IdProperty} no encontrada.");
+
+            var exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
+            if (exists)
+                throw new InvalidOperationException($"Ya existe una propiedad con el código interno {dto.CodeInternal}.");
+
+            property.Update(dto.Name, dto.Address, dto.Price, dto.CodeInternal, dto.Year, dto.IdOwner);
+
+            _db.Properties.Update(property);
+            await _db.SaveChangesAsync();
+
+            return $"Propiedad con ID {dto.IdProperty} actualizada correctamente.";
+        }
+
+
+        public async Task<(IEnumerable<PropertyDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting)
+        {
+            var query = _db.Properties.AsQueryable();
+
+            var totalCount = await query.CountAsync();
+
+            query = query.OrderBy(sorting);
+
+            var properies = await query
+                .Skip((page - 1) * sizePage)
+                .Take(sizePage)
+                .Select(p => new PropertyDto
+                {
+                    IdProperty = p.IdProperty,
+                    Name = p.Name,
+                    Address = p.Address,
+                    Price = p.Price,
+                    CodeInternal = p.CodeInternal,
+                    Year = p.Year,
+
+                    IdOwner = p.IdOwner,
+                    OwnerIdentification = p.Owner.Identification,
+                    OwnerIdentificationType = p.Owner.IdentificationType,
+                    OwnerName = p.Owner.Name
+                })
+                .ToListAsync();
+
+            return (properies, totalCount);
+        }
+       
+        public async Task<PropertyDto?> GetByIdAsync(int id)
+        {
+            var property = await _db.Properties
+                .Where(x => x.IdProperty == id)
+                .Select(x => new PropertyDto
+                {
+                    IdProperty = x.IdProperty,
+                    Name = x.Name,
+                    Address = x.Address,
+                    Price = x.Price,
+                    CodeInternal = x.CodeInternal,
+                    Year = x.Year,
+
+                    IdOwner = x.IdOwner,
+                    OwnerIdentification = x.Owner.Identification,
+                    OwnerIdentificationType = x.Owner.IdentificationType,
+                    OwnerName = x.Owner.Name
+                })
+                .FirstOrDefaultAsync();
+
+            if (property == null)
+                throw new NotFoundException($"Property with ID {id} not found.");
+
+            return property;
+        }
+
         public async Task<(IEnumerable<PropertyDto> Items, int TotalCount)> GetAllXOwnerId(int ownerId, int page, int sizePage, string sorting)
         {
             var query = _db.Properties.AsQueryable();
@@ -112,35 +172,6 @@ namespace Properties.Infrastructure.Implementation
                 .ToListAsync();
 
             return (properties, totalCount);
-        }
-
-        public async Task<string> Delete(int id)
-        {
-            var property = await _db.Properties.FindAsync(id);
-            if (property is null)
-                return $"Propiedad con el ID {id} no existe";
-
-            _db.Properties.Remove(property);
-            await _db.SaveChangesAsync();
-            return $"Propiedad con ID {id} eliminada correctamente";
-        }
-
-        public async Task<string> Update(PropertyDto dto)
-        {
-            var property = await _db.Properties.FindAsync(dto.IdProperty);
-            if (property is null)
-                throw new NotFoundException($"Propiedad con ID {dto.IdProperty} no encontrada.");
-
-            var exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
-            if (exists)
-                throw new InvalidOperationException($"Ya existe una propiedad con el código interno {dto.CodeInternal}.");
-
-            property.Update(dto.Name, dto.Address, dto.Price, dto.CodeInternal, dto.Year, dto.IdOwner);
-
-            _db.Properties.Update(property);
-            await _db.SaveChangesAsync();
-
-            return $"Propiedad con ID {dto.IdProperty} actualizada correctamente.";
         }
 
     }

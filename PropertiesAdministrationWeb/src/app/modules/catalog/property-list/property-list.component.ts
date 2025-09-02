@@ -20,7 +20,8 @@ export class PropertyListComponent implements OnInit {
 
   displayedColumns: string[] = [
     'idProperty',
-    'ownerId',
+    'ownerName',
+    'ownerIdentification',
     'name',
     'address',
     'price',
