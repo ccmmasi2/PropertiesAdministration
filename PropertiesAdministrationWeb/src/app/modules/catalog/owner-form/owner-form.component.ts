@@ -1,15 +1,14 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
-import { IdentificationType } from '@app/models/identificationType.model';
-import { OwnerDTO } from '@app/models/owner.model';
-import { PropertyDTO } from '@app/models/property.model';
 import { ConfirmDialogComponent } from '@app/modules/shared/confirm-dialog/confirm-dialog.component';
 import { AlertService } from '@app/services/alert-service.service';
 import { ApiConnectionService } from '@app/services/api-connection.service';
-import { EventService } from '@app/services/event.service';
 import { ReactiveSharedService } from '@app/services/reactive-shared.service';
+import { EventService } from '@app/services/event.service';
+import { Router } from '@angular/router';
+import { OwnerDTO } from '@app/models/owner.model';
+import { IdentificationType } from '@app/models/identificationType.model';
 
 @Component({
   selector: 'app-owner-form',
@@ -18,26 +17,26 @@ import { ReactiveSharedService } from '@app/services/reactive-shared.service';
 
 export class OwnerFormComponent implements OnInit {
   isCollapsed: boolean = true;
-  
+ 
   @ViewChild('ownerForm') ownerForm!: NgForm; 
   cartItems: OwnerDTO[] = []; 
 
   ownerId: number = 0;
-  selectIdentificationType: number | null = null;
+  selectIdentificationType: number = 0;
   identificationTypeOptions: { id: number; name: string }[] = [];
   identification: string = '';
   name: string = '';
-  birthDay: string = '';
   address: string = '';
+  birthDay: string = '';
   activateSubmitButton: boolean = true;
-
+  
   constructor(
     public apiConnectionService: ApiConnectionService,
     private alertService: AlertService,
     public reactiveSharedService: ReactiveSharedService,
     private eventService: EventService,
     private dialog: MatDialog,
-    private route: ActivatedRoute
+    private router: Router
   ) {
     this.eventService.watchButtonClick.subscribe((ownerId: number) => {
       this.loadOwner(ownerId);
@@ -52,13 +51,20 @@ export class OwnerFormComponent implements OnInit {
     this.eventService.deleteButtonClick.subscribe((ownerId: number) => {
       this.deleteOwner(ownerId);
     });
+    this.eventService.watchBeneficiariesButtonClick.subscribe((ownerId: number) => {
+      this.router.navigate(['system/properties/',  { ownerId: ownerId } ]);
+    });
   }
 
   loadOwner(ownerId: number){
     this.apiConnectionService.getOwnerXId(ownerId)
     .subscribe((owner) => { 
       owner.birthDay = new Date(owner.birthDay).toISOString().split('T')[0];  
-      this.ownerForm.reset(owner);
+
+      if (this.ownerForm) {
+        this.ownerForm.reset(owner);
+      }
+
       this.selectIdentificationType = owner.identificationType;
       this.isCollapsed = false; 
     });
@@ -83,14 +89,14 @@ export class OwnerFormComponent implements OnInit {
       }
     });
   }
-  
+
   ngOnInit(): void {
-    this.loadDataOptions();  
-  }  
+    this.loadDataOptions(); 
+  }
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;   
-  } 
+  }
 
   loadDataOptions(): void {
     this.identificationTypeOptions = [
@@ -102,7 +108,7 @@ export class OwnerFormComponent implements OnInit {
         name: key
       }))
     ]; 
-  }  
+  }   
 
   submitForm(): void {
     if (this.ownerForm.valid) {

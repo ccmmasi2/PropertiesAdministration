@@ -86,21 +86,17 @@ export class ApiConnectionService {
         return throwError(() => new Error('Error eliminando propietario: ' + (error.message || error)));
       })
     ) 
-  } 
+  }  
   
-  getOwnerXId(
-    ownerId: number,
-  ): Observable<OwnerDTO> {
+  getOwnerXId(ownerId: number): Observable<OwnerDTO> {
     const url = `${this.baseUrl}/api/Owner/${ownerId}`;
-    
-    return this.http.get<{result: OwnerDTO}>(url).pipe(
-      map(response => response.result), 
-      catchError((error: any) => {
-        console.error('Error obteniendo owner:', error);
-        return throwError(() => new Error('Error obteniendo owner'));
+    return this.http.get<OwnerDTO>(url).pipe(
+      catchError(error => {
+        console.error('Error obteniendo el propietario:', error);
+        return throwError(() => new Error('Error obteniendo el propietario por id'));
       })
     );
-  } 
+  }  
   
   getOwnersXFilter(searchTerm: string): Observable<OwnerDTO[]> {
     const url = `${this.baseUrl}/api/Owner/ObtAllXFilter?term=${searchTerm}`;
