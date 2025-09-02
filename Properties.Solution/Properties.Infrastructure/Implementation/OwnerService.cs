@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Properties.Application.Exceptions;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
@@ -42,7 +43,6 @@ namespace Properties.Infrastructure.Implementation
         public async Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto)
         {
             var exists = await _db.Owners.AnyAsync(x => x.Identification.ToLower() == dto.Identification.ToLower());
-
             if (exists)
                 throw new InvalidOperationException("Owner with Identification {dto.Identification} already exists.");
 
@@ -85,16 +85,14 @@ namespace Properties.Infrastructure.Implementation
             return owners;
         }
 
-        public async Task<string> Delete(Int64 id)
+        public async Task<string> Delete(int id)
         {
             var owner = await _db.Owners.FindAsync(id);
-
             if (owner is null)
                 return $"Propietario con el ID {id} no existe";
 
             _db.Owners.Remove(owner);
             await _db.SaveChangesAsync();
-
             return $"Propietario con ID {id} eliminado correctamente";
         }
 
@@ -104,8 +102,7 @@ namespace Properties.Infrastructure.Implementation
             if (owner is null)
                 throw new NotFoundException($"Propietario con ID {dto.IdOwner} no encontrado.");
 
-            var exists = await _db.Owners
-                .AnyAsync(x => x.Identification.ToLower() == dto.Identification.ToLower()
+            var exists = await _db.Owners.AnyAsync(x => x.Identification.ToLower() == dto.Identification.ToLower()
                                && x.IdOwner != dto.IdOwner);
             if (exists)
                 throw new InvalidOperationException($"Ya existe un propietario con la identificación {dto.Identification}.");

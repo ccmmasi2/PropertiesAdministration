@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Properties.API.LocalDTOs;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
+using Properties.Domain;
 
 namespace Properties.API.Controllers
 {
@@ -92,15 +95,22 @@ namespace Properties.API.Controllers
         [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<string>> Delete(Int64 id)
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<ActionResult<string>> Delete(int id)
         {
             if (id == 0)
-            {
                 return BadRequest("ID invalido");
-            }
 
-            var result = await _service.Delete(id);
-            return Ok(result);
+            try
+            {
+                var result = await _service.Delete(id);
+                return Ok(result);
+            }
+            catch (DbUpdateException ex)
+                when (ex.InnerException is SqliteException sqliteEx && sqliteEx.SqliteErrorCode == 19)
+            {
+                return Conflict($"No se puede eliminar el propietario con ID {id} porque tiene entidades que dependen de él");
+            }
         }
 
         [Authorize(Policy = "AdminOnly")]

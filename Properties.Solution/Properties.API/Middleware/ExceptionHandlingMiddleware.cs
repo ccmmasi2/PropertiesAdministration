@@ -43,7 +43,7 @@ namespace Properties.API.Middleware
 
             var errorResponse = new
             {
-                error = exception.Message,
+                message = exception.Message,
                 status = statusCode
             };
 

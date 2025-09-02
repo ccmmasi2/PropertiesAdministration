@@ -77,14 +77,14 @@ export class ApiConnectionService {
     );
   }
   
-  deleteOwner(id: number): Observable<string> {
-    const url = `${this.baseUrl}/api/Owner/${id}`;
-    return this.http.delete<string>(url, { responseType: 'text' as 'json' }).pipe(
-      catchError((error: any) => {
-        console.error('Error eliminando el propietario:', error);
-        return throwError(() => new Error('Error eliminando propietario: ' + (error.message || error)));
+  deleteOwner(id: number): Observable< { message: string }> {
+    const url = `${this.baseUrl}/api/Owner/Delete/${id}`;
+    return this.http.delete< {message: string }>(url).pipe(
+       catchError(error => {
+        const message = typeof error.error === 'string' ? error.error : error.error?.message || 'Ocurrió un error desconocido';
+        return throwError(message); 
       })
-    ) 
+    );
   }  
   
   getOwnerXId(ownerId: number): Observable<OwnerDTO> {

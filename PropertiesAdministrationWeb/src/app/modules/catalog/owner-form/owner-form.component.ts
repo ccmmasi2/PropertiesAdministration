@@ -57,6 +57,7 @@ export class OwnerFormComponent implements OnInit {
   }
 
   loadOwner(ownerId: number){
+    this.resetForm();
     this.apiConnectionService.getOwnerXId(ownerId)
     .subscribe((owner) => { 
       owner.birthDay = new Date(owner.birthDay).toISOString().split('T')[0];  
@@ -79,11 +80,12 @@ export class OwnerFormComponent implements OnInit {
       if (result) {
         this.apiConnectionService.deleteOwner(ownerId).subscribe(
           (response) => { 
-            this.alertService.showAlert(response, 'success');
+            this.alertService.showAlert(response.message, 'success');
             this.refreshOwnerList();
           },
           (error) => {
-            this.alertService.showAlert(`Error eliminando el propietario: ${error.message || error}`, 'error');
+            const message = error;
+            this.alertService.showAlert(message, 'error');
           }
         );
       }

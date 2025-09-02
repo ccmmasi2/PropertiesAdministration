@@ -7,7 +7,7 @@ namespace Properties.Application.Interface
         Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto);
         Task<OwnerDto?> GetByIdAsync(int id);
         Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term);
-        Task<string> Delete(Int64 id);
+        Task<string> Delete(int id);
         Task<string> Update(OwnerDto dto);
         Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting);
     }
