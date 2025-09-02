@@ -15,7 +15,7 @@ export class ApiConnectionService {
   
   constructor(private http: HttpClient) {}
   
-  getOwners2(
+  getOwners(
     page: number,
     sizePage: number,
     sorting: string

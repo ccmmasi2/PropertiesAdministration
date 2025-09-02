@@ -32,6 +32,15 @@ namespace Properties.API.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
+        [HttpGet("ObtAll")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<object>>> GetAll(int page = 1, int sizePage = 10, string sorting = "IdOwner")
+        {
+            var LItems = await _service.GetAll(page, sizePage, sorting);
+            return Ok(LItems);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -65,6 +74,7 @@ namespace Properties.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.IdOwner }, created);
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpGet("ObtAllXFilter")]
         public async Task<IActionResult> ObtAllXFilter(string term)
         {
@@ -76,6 +86,7 @@ namespace Properties.API.Controllers
             return NotFound("No se encontraron empleados con el filtro");
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpDelete("Delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,6 +101,7 @@ namespace Properties.API.Controllers
             return Ok(result);
         }
 
+        [Authorize(Policy = "AdminOnly")]
         [HttpPut("Update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

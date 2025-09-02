@@ -4,6 +4,7 @@ using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
 using Properties.Contracts.DTO;
 using Properties.Domain;
+using System.Linq.Dynamic.Core;
 
 namespace Properties.Infrastructure.Implementation
 {
@@ -139,6 +140,32 @@ namespace Properties.Infrastructure.Implementation
             await _db.SaveChangesAsync();
 
             return $"Propietario con ID {dto.IdOwner} actualizado correctamente.";
+        }
+
+        public async Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting)
+        {
+            var query = _db.Owners.AsQueryable();
+
+            var totalCount = await query.CountAsync();
+
+            query = query.OrderBy(sorting);
+
+            var owners = await query
+                .Skip((page - 1) * sizePage)
+                .Take(sizePage)
+                .Select(x => new OwnerDto
+                {
+                    IdOwner = x.IdOwner,
+                    Name = x.Name,
+                    IdentificationType = x.IdentificationType,
+                    Identification = x.Identification,
+                    Address = x.Address,
+                    Photo = x.Photo,
+                    BirthDay = x.BirthDay
+                })
+                .ToListAsync();
+
+            return (owners, totalCount);
         }
     }
 }
