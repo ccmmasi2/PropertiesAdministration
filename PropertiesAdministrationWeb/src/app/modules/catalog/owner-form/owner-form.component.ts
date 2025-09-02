@@ -164,7 +164,7 @@ export class OwnerFormComponent implements OnInit {
       name: this.name,
       address: this.address, 
       birthDay: this.birthDay,
-      photo: null
+      photo: 'No image yet'
     }
 
     return ownerRequest;

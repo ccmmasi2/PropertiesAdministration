@@ -110,15 +110,7 @@ namespace Properties.Infrastructure.Implementation
             if (exists)
                 throw new InvalidOperationException($"Ya existe un propietario con la identificación {dto.Identification}.");
 
-            var resultDto = new OwnerDto
-            {
-                Name = owner.Name,
-                IdentificationType = owner.IdentificationType,
-                Identification = owner.Identification,
-                Address = owner.Address,
-                Photo = owner.Photo,
-                BirthDay = owner.BirthDay
-            };
+            owner.Update(dto.Name, dto.IdentificationType, dto.Identification, dto.Address, dto.Photo, dto.BirthDay);
 
             _db.Owners.Update(owner);
             await _db.SaveChangesAsync();

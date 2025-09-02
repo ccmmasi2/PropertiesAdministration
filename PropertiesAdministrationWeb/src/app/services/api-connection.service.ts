@@ -54,8 +54,7 @@ export class ApiConnectionService {
   } 
   
   updateOwner(ownerRequest: OwnerDTO): Observable<string> {
-    return this.http
-    .put(`${this.baseUrl}/api/Owner`, ownerRequest, {
+    return this.http.put(`${this.baseUrl}/api/Owner/Update`, ownerRequest, {
       observe: 'response',
       responseType: 'text' as 'json'
     })

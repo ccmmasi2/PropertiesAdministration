@@ -27,5 +27,15 @@ namespace Properties.Domain
             Photo = photo;
             BirthDay = birthDay;
         }
+
+        public void Update(string name, IdentificationType identificationType, string identification, string address, string? photo, DateTime birthDay)
+        {
+            Name = name;
+            IdentificationType = identificationType;
+            Identification = identification;
+            Address = address;
+            Photo = photo;
+            BirthDay = birthDay;
+        }
     }
 }
