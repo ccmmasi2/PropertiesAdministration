@@ -2,9 +2,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OwnerDTO } from '../models/owner.model';
 import { PropertyDTO } from '../models/property.model';
-import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -187,10 +187,10 @@ export class ApiConnectionService {
     })
     .pipe(
       map(response => {
-        return 'Beneficiario actualizado correctamente';
+        return 'property actualizado correctamente';
       }),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = 'Error al actualizar beneficiario';
+        let errorMessage = 'Error al actualizar property';
         if (error.error instanceof ErrorEvent) {
           console.error('An error occurred:', error.error.message);
         } else {
@@ -205,28 +205,28 @@ export class ApiConnectionService {
     const url = `${this.baseUrl}/api/Beneficiary/Delete/${id}`;
     return this.http.delete<string>(url, { responseType: 'text' as 'json' }).pipe(
       catchError((error: any) => {
-        console.error('Error eliminando beneficiario:', error);
-        return throwError(() => new Error('Error eliminando beneficiario: ' + (error.message || error)));
+        console.error('Error eliminando property:', error);
+        return throwError(() => new Error('Error eliminando property: ' + (error.message || error)));
       })
     ) 
   } 
   
-  getBeneficiaryXId(
-    beneficiaryId: number,
+  getPropertyXId(
+    idProperty: number,
   ): Observable<PropertyDTO> {
-    const url = `${this.baseUrl}/api/Beneficiary/${beneficiaryId}`;
+    const url = `${this.baseUrl}/api/Beneficiary/${idProperty}`;
     
     return this.http.get<{result: PropertyDTO}>(url).pipe(
       map(response => response.result), 
       catchError((error: any) => {
-        console.error('Error obteniendo beneficiario:', error);
-        return throwError(() => new Error('Error obteniendo beneficiario'));
+        console.error('Error obteniendo property:', error);
+        return throwError(() => new Error('Error obteniendo property'));
       })
     );
   } 
   
-  getEmployeesXFilter(searchTerm: string): Observable<OwnerDTO[]> {
-    const url = `${this.baseUrl}/api/Employee/ObtAllXFilter?term=${searchTerm}`;
+  getOwnersXFilter(searchTerm: string): Observable<OwnerDTO[]> {
+    const url = `${this.baseUrl}/api/Owner/ObtAllXFilter?term=${searchTerm}`;
     return this.http.get<OwnerDTO[]>(url).pipe(
       catchError(error => {
         console.error('Error obteniendo empleados por filtro:', error);

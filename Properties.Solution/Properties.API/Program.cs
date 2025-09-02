@@ -81,6 +81,22 @@ builder.Services.AddSingleton<ITraceLogger, TraceLogger>();
 
 
 // ========================
+// CORS
+// ========================
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy =>
+        {
+            policy.WithOrigins("https://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
+
+
+// ========================
 // Cloudinary
 // ========================
 var cloudinarySettings = builder.Configuration.GetSection("CloudinarySettings");
@@ -155,6 +171,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAngular");
 
 app.UseAuthentication();
 app.UseAuthorization();

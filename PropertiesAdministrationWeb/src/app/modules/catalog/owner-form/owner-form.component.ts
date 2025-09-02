@@ -1,7 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { OwnerDTO } from '@app/models/owner.model';
 import { PropertyDTO } from '@app/models/property.model';
+import { AlertService } from '@app/services/alert-service.service';
+import { ApiConnectionService } from '@app/services/api-connection.service';
+import { EventService } from '@app/services/event.service';
+import { ReactiveSharedService } from '@app/services/reactive-shared.service';
 
 @Component({
   selector: 'app-owner-form',
@@ -13,14 +19,14 @@ export class OwnerFormComponent implements OnInit {
   @ViewChild('propertyyForm') propertiesForm!: NgForm; 
   cartItems: PropertyDTO[] = []; 
   
-  formByEmployee: boolean = false;
-  employeeIdByURL: number = 0;
+  formByOwner: boolean = false;
+  idOwnerByURL: number = 0;
   ownerURLInformation: string = '';
   isSearchOwnerTermDisabled: boolean = false;
   
   searchOwnerTerm: string = '';
-  beneficiaryId: number = 0;
-  selectEmployeeId: number = 0;
+  idProperty: number = 0;
+  selectIdOwner: number = 0;
   selectIdentificationType: number = 0;
   ownerResults: OwnerDTO[] = []; 
   name: string = '';
@@ -41,97 +47,97 @@ export class OwnerFormComponent implements OnInit {
     private route: ActivatedRoute,
     private changeDetectorRef: ChangeDetectorRef
   ) {
-    this.eventService.watchButtonClick.subscribe((beneficiaryId: number) => {
-      this.loadBeneficiary(beneficiaryId);
-      this.beneficiaryId = 0;
+    this.eventService.watchButtonClick.subscribe((idProperty: number) => {
+      this.loadProperties(idProperty);
+      this.idProperty = 0;
       this.activateSubmitButton = false;
     });
-    this.eventService.editButtonClick.subscribe((beneficiaryId: number) => {
-      this.loadBeneficiary(beneficiaryId);
-      this.beneficiaryId = beneficiaryId;
+    this.eventService.editButtonClick.subscribe((idProperty: number) => {
+      this.loadProperties(idProperty);
+      this.idProperty = idProperty;
       this.activateSubmitButton = true;      
     });
-    this.eventService.deleteButtonClick.subscribe((beneficiaryId: number) => {
-      this.deleteBeneficiary(beneficiaryId);
+    this.eventService.deleteButtonClick.subscribe((idProperty: number) => {
+      this.deleteBeneficiary(idProperty);
     });
   }
   
   ngOnInit(): void {
-    this.formByEmployee = false;
+    this.formByOwner = false;
     this.ownerURLInformation = '';
     this.isSearchOwnerTermDisabled = false;
     
     this.route.params.subscribe(params => {
-      if(params["employeeId"]) {
-        this.loadFormWithEmployeeUrl(params["employeeId"]);
+      if(params["idOwner"]) {
+        this.loadFormWithOwnerUrl(params["idOwner"]);
       } 
     });
     
     this.loadDataOptions(); 
   }   
   
-  loadFormWithEmployeeUrl(employeeId: number){
-    this.formByEmployee = true;
-    this.employeeIdByURL = employeeId;
+  loadFormWithOwnerUrl(idOwner: number){
+    this.formByOwner = true;
+    this.idOwnerByURL = idOwner;
     
-    this.apiConnectionService.getEmployeeXId(this.employeeIdByURL)
+    this.apiConnectionService.getOwnerXId(this.idOwnerByURL)
     .subscribe({
-      next: (employee) => {
-        if (employee) {
-          this.ownerURLInformation = 'del Empleado: ' + employee.name + ' ' + employee.identification;
-          this.selectOwner(employee);
+      next: (owner) => {
+        if (owner) {
+          this.ownerURLInformation = 'del owner: ' + owner.name + ' ' + owner.identification;
+          this.selectOwner(owner);
           this.isSearchOwnerTermDisabled = true;
         } else {
-          this.ownerURLInformation = 'Empleado no encontrado';
+          this.ownerURLInformation = 'owner no encontrado';
         }
         this.changeDetectorRef.detectChanges();
       },
       error: (error) => {
-        console.error('Failed to load employee:', error);
-        this.ownerURLInformation = 'Error al cargar datos del empleado';
+        console.error('Failed to load owner:', error);
+        this.ownerURLInformation = 'Error al cargar datos del owner';
       }
     });
   }
   
-  loadBeneficiary(beneficiaryId: number){
-    this.apiConnectionService.getBeneficiaryXId(beneficiaryId)
-    .subscribe((beneficiary) => { 
-      beneficiary.birthDay = new Date(beneficiary.birthDay).toISOString().split('T')[0];  
-      this.propertiesForm.reset(beneficiary);
-      this.selectIdentificationType = beneficiary.countryId;
-      this.isCollapsed = false; 
+  loadProperties(idProperty: number){
+    this.apiConnectionService.getPropertyXId(idProperty)
+    .subscribe((property) => { 
+      // property.birthDay = new Date(property.birthDay).toISOString().split('T')[0];  
+      // this.propertiesForm.reset(property);
+      // this.selectIdentificationType = property.countryId;
+      // this.isCollapsed = false; 
       
-      if(this.employeeIdByURL && this.employeeIdByURL > 0) {
-        this.loadEmployee(beneficiary.employeeId);
+      if(this.idOwnerByURL && this.idOwnerByURL > 0) {
+        this.loadOwner(property.idOwner);
       }
     });
   } 
   
-  loadEmployee(employeeId: number){
-    this.apiConnectionService.getEmployeeXId(employeeId)
-    .subscribe((employee) => { 
-      this.selectOwner(employee);
+  loadOwner(idOwner: number){
+    this.apiConnectionService.getOwnerXId(idOwner)
+    .subscribe((owner) => { 
+      this.selectOwner(owner);
     });
   }
   
-  deleteBeneficiary(beneficiaryId: number) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px'
-    });
+  deleteBeneficiary(idProperty: number) {
+    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //   width: '250px'
+    // });
     
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiConnectionService.deleteBeneficiary(beneficiaryId).subscribe(
-          (response) => { 
-            this.alertService.showAlert(response, 'success');
-            this.refreshBeneficiaryList();
-          },
-          (error) => {
-            this.alertService.showAlert(`Error eliminando el beneficiario: ${error.message || error}`, 'error');
-          }
-        );
-      }
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if (result) {
+    //     this.apiConnectionService.deleteBeneficiary(idProperty).subscribe(
+    //       (response) => { 
+    //         this.alertService.showAlert(response, 'success');
+    //         this.refreshBeneficiaryList();
+    //       },
+    //       (error) => {
+    //         this.alertService.showAlert(`Error eliminando el property: ${error.message || error}`, 'error');
+    //       }
+    //     );
+    //   }
+    // });
   }
   
   toggleCollapse() {
@@ -139,19 +145,19 @@ export class OwnerFormComponent implements OnInit {
   }
   
   loadDataOptions(): void {
-    this.apiConnectionService.getCountries().subscribe((info) => {
-      if(info){
-        this.identificationTypeOptions = info;
-      }
-      else {
-        const message = `Error cargando paises`
-        this.alertService.showAlert(message, 'error'); 
-      }
-    },
-    (error) => {
-      const message = `Error cargando paises: "${error}"`
-      this.alertService.showAlert(message, 'error'); 
-    }) 
+    // this.apiConnectionService.getCountries().subscribe((info) => {
+    //   if(info){
+    //     this.identificationTypeOptions = info;
+    //   }
+    //   else {
+    //     const message = `Error cargando paises`
+    //     this.alertService.showAlert(message, 'error'); 
+    //   }
+    // },
+    // (error) => {
+    //   const message = `Error cargando paises: "${error}"`
+    //   this.alertService.showAlert(message, 'error'); 
+    // }) 
   }  
   
   validateAge(birthDay: Date | string): boolean {
@@ -172,47 +178,47 @@ export class OwnerFormComponent implements OnInit {
   submitForm(): void {
     if (this.propertiesForm.valid) {
       if (!this.validateAge(this.birthDay)) {
-        const message = `El beneficiario debe tener al menos 18 años`
+        const message = `El property debe tener al menos 18 años`
         this.alertService.showAlert(message, 'error'); 
         this.isCollapsed = true;
         return;
       }
       else {
-        if(this.beneficiaryId > 0) {
-          const beneficiaryRequest: BeneficiaryDTO = this.prepareBeneficiaryDTO();
-          beneficiaryRequest.id = this.beneficiaryId;
+        if(this.idProperty > 0) {
+          // const beneficiaryRequest: BeneficiaryDTO = this.prepareBeneficiaryDTO();
+          // beneficiaryRequest.id = this.idProperty;
           
-          this.apiConnectionService.updateBeneficiary(beneficiaryRequest).subscribe({
-            next: (message) => {
-              this.alertService.showAlert(message, 'success');
-              this.resetForm();
-              this.isCollapsed = true;
-              this.refreshBeneficiaryList();
-            },
-            error: (error) => {
-              const message = `Error al crear el beneficiario: ${error.message || error}`;
-              this.alertService.showAlert(message, 'error');
-              this.isCollapsed = false;
-            }
-          });
+          // this.apiConnectionService.updateBeneficiary(beneficiaryRequest).subscribe({
+          //   next: (message) => {
+          //     this.alertService.showAlert(message, 'success');
+          //     this.resetForm();
+          //     this.isCollapsed = true;
+          //     this.refreshBeneficiaryList();
+          //   },
+          //   error: (error) => {
+          //     const message = `Error al crear el property: ${error.message || error}`;
+          //     this.alertService.showAlert(message, 'error');
+          //     this.isCollapsed = false;
+          //   }
+          // });
         }
         else {
-          const beneficiaryRequest: BeneficiaryDTO = this.prepareBeneficiaryDTO();
+          // const beneficiaryRequest: BeneficiaryDTO = this.prepareBeneficiaryDTO();
           
-          this.apiConnectionService.createBeneficiary(beneficiaryRequest).subscribe({
-            next: () => {
-              const message = 'Beneficiario creado';
-              this.alertService.showAlert(message, 'success');
-              this.resetForm();
-              this.isCollapsed = true;
-              this.refreshBeneficiaryList();
-            },
-            error: (error) => {
-              const message = `Error al crear el beneficiario: ${error.message || error}`;
-              this.alertService.showAlert(message, 'error');
-              this.isCollapsed = true;
-            }
-          });
+          // this.apiConnectionService.createBeneficiary(beneficiaryRequest).subscribe({
+          //   next: () => {
+          //     const message = 'Beneficiario creado';
+          //     this.alertService.showAlert(message, 'success');
+          //     this.resetForm();
+          //     this.isCollapsed = true;
+          //     this.refreshBeneficiaryList();
+          //   },
+          //   error: (error) => {
+          //     const message = `Error al crear el property: ${error.message || error}`;
+          //     this.alertService.showAlert(message, 'error');
+          //     this.isCollapsed = true;
+          //   }
+          // });
         } 
       } 
     }  else {
@@ -222,43 +228,43 @@ export class OwnerFormComponent implements OnInit {
   }
   
   refreshBeneficiaryList() {
-    if(this.employeeIdByURL && this.employeeIdByURL > 0) {
-      this.reactiveSharedService.getBeneficiariesByEmployeeId(this.employeeIdByURL);
+    if(this.idOwnerByURL && this.idOwnerByURL > 0) {
+      this.reactiveSharedService.getBeneficiariesByEmployeeId(this.idOwnerByURL);
     }
     else {
-      this.reactiveSharedService.getBeneficiaries();
+      // this.reactiveSharedService.getBeneficiaries();
     }
   } 
   
-  private prepareBeneficiaryDTO(): BeneficiaryDTO {
-    const employeeRequest: BeneficiaryDTO = {
-      id: 0,
-      employeeId: this.selectEmployeeId,
-      countryId: this.selectIdentificationType, 
-      participationPercentaje: this.participationPercentaje,
-      name: this.name,
-      identification: this.identification, 
-      birthDay: this.birthDay,
-      curp: this.curp,
-      ssn: this.ssn,
-      phoneNumber: this.phoneNumber,
-      countryName: '', 
-      employeeName: '',
-      employeeNumber: 0
-    }
+  // private prepareBeneficiaryDTO(): BeneficiaryDTO {
+  //   const employeeRequest: BeneficiaryDTO = {
+  //     id: 0,
+  //     idOwner: this.selectIdOwner,
+  //     countryId: this.selectIdentificationType, 
+  //     participationPercentaje: this.participationPercentaje,
+  //     name: this.name,
+  //     identification: this.identification, 
+  //     birthDay: this.birthDay,
+  //     curp: this.curp,
+  //     ssn: this.ssn,
+  //     phoneNumber: this.phoneNumber,
+  //     countryName: '', 
+  //     employeeName: '',
+  //     employeeNumber: 0
+  //   }
     
-    return employeeRequest;
-  }
+  //   return employeeRequest;
+  // }
   
   public resetForm(): void {
-    if(this.employeeIdByURL && this.employeeIdByURL > 0) {
-      this.loadFormWithEmployeeUrl(this.employeeIdByURL);
+    if(this.idOwnerByURL && this.idOwnerByURL > 0) {
+      this.loadFormWithOwnerUrl(this.idOwnerByURL);
     }
     else {
-      this.selectEmployeeId = 0;
+      this.selectIdOwner = 0;
     }
 
-    this.beneficiaryId = 0;
+    this.idProperty = 0;
     this.selectIdentificationType = 0;
     this.name = '';
     this.identification = '';
@@ -273,21 +279,21 @@ export class OwnerFormComponent implements OnInit {
   
   onSearchChange(): void {
     if (this.searchOwnerTerm && this.searchOwnerTerm.length > 0) {
-      this.apiConnectionService.getEmployeesXFilter(this.searchOwnerTerm)
+      this.apiConnectionService.getOwnersXFilter(this.searchOwnerTerm)
       .subscribe(results => {
         this.ownerResults = results;
       }, error => {
-        console.error('Failed to load employees:', error);
-        this.alertService.showAlert('Error cargando empleados: ' + error.message, 'error');
+        console.error('Failed to load owners:', error);
+        this.alertService.showAlert('Error cargando propietario: ' + error.message, 'error');
       });
     } else {
       this.ownerResults = [];  
     }
   }
   
-  selectOwner(employee: OwnerDTO): void {
-    this.selectEmployeeId = employee.id;
-    this.searchOwnerTerm = `${employee.name} (${employee.id})`;   
+  selectOwner(owner: OwnerDTO): void {
+    this.selectIdOwner = owner.idOwner;
+    this.searchOwnerTerm = `${owner.name} (${owner.idOwner})`;   
     this.ownerResults = [];   
   }
   
@@ -295,23 +301,5 @@ export class OwnerFormComponent implements OnInit {
     setTimeout(() => {   
       this.ownerResults = [];
     }, 200);
-  }
-  
-  validateParticipationTotal(): void {
-    if (this.selectEmployeeId) {
-      this.apiConnectionService.validateTotalParticipation(this.selectEmployeeId, this.participationPercentaje)
-      .subscribe({
-        next: (isValid) => {
-          if (!isValid) {
-            this.alertService.showAlert('La suma total de los porcentajes de participación excede el 100%', 'error');
-            this.isCollapsed = true;
-          }
-        },
-        error: (error) => {
-          console.error('Error al validar la suma de participación', error);
-          this.alertService.showAlert('Error al validar la suma de participación', 'error');
-        }
-      });
-    }
   }
 }

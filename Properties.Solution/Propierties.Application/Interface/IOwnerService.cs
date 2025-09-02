@@ -7,5 +7,6 @@ namespace Properties.Application.Interface
         Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto);
         Task<List<OwnerDto>> GetAllAsync();
         Task<OwnerDto?> GetByIdAsync(int id);
+        Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term);
     }
 }

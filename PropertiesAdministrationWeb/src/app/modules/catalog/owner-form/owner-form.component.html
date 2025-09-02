@@ -22,7 +22,7 @@
 								</ul>
 							</div> 
                 
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="labelText" for="selectIdentificationType">Tipo Identificación:</label> 
 								<div class="select-container-intern">
 									<div class="select-container">
@@ -38,7 +38,7 @@
 									  </select>
 								  </div>
 								</div>
-							</div>  
+							</div>   -->
 
 							<div class="form-group">
 								<label class="labelText" for="name">Nombre:</label>
@@ -54,16 +54,26 @@
 							</div>
 							
 							<div class="form-group">
-								<label class="labelText" for="identification">Identification:</label>
+								<label class="labelText" for="identification">Identificación:</label>
 								<input class="inputText" 
 								type="text" 
 								id="identification" 
-								name="identification" 
+								identification="identification" 
 								[(ngModel)]="identification"
 								maxlength="15"
 								required
 								#identificationField="ngModel"
 								[ngClass]="{ 'inputText': true, 'ng-invalid': identificationField.invalid && (identificationField.dirty || identificationField.touched) }">
+							</div>
+
+							<div class="form-group">
+								<label class="labelText" for="address">Dirección:</label>
+								<input class="inputText" 
+								type="text"
+								id="address" 
+								address="address" 
+								maxlength="50"
+								required>
 							</div>
 							
 							<div class="form-group">
@@ -76,57 +86,6 @@
 								required
 								#birthDayField="ngModel"
 								[ngClass]="{ 'inputText': true, 'ng-invalid': birthDayField.invalid && (birthDayField.dirty || birthDayField.touched) }">
-							</div>
-							
-							<div class="form-group">
-								<label class="labelText" for="curp">CURP:</label>
-								<input class="inputText" 
-								type="text" 
-								id="curp" 
-								name="curp" 
-								[(ngModel)]="curp"
-								maxlength="10"
-								required
-								#curpField="ngModel"
-								appNumericInput
-								[ngClass]="{ 'inputText': true, 'ng-invalid': curpField.invalid && (curpField.dirty || curpField.touched) }">
-							</div>
-							
-							<div class="form-group">
-								<label class="labelText" for="ssn">SSN:</label>
-								<input class="inputText" 
-								type="text" 
-								id="ssn" 
-								name="ssn" 
-								[(ngModel)]="ssn"
-								maxlength="10"
-								required
-								#ssnField="ngModel"
-								appNumericInput
-								[ngClass]="{ 'inputText': true, 'ng-invalid': ssnField.invalid && (ssnField.dirty || ssnField.touched) }">
-							</div>
-							
-							<div class="form-group">
-								<label class="labelText" for="phoneNumber">Número telefónico:</label>
-								<input class="inputText" 
-								type="text" 
-								id="phoneNumber" 
-								name="phoneNumber" 
-								[(ngModel)]="phoneNumber"
-								appNumericInput
-								maxlength="10">
-							</div> 
-							
-							<div class="form-group">
-								<label class="labelText" for="participationPercentaje">Porcentaje de participación:</label>
-								<input class="inputText" 
-								type="text" 
-								id="participationPercentaje" 
-								name="participationPercentaje" 
-								[(ngModel)]="participationPercentaje"
-								appPercentajeInput
-								maxlength="10"
-								(blur)="validateParticipationTotal()">
 							</div> 
 							
 						</form>
@@ -136,7 +95,7 @@
 				</div>
 			</div>
 			<div class="separator"></div>
-			<app-beneficiary-list></app-beneficiary-list>
+			<!-- <app-beneficiary-list></app-beneficiary-list> -->
 		</div>
 	</div>
 </div>

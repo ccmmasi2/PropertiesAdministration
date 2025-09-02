@@ -61,5 +61,16 @@ namespace Properties.API.Controllers
             var created = await _service.CreateWithValidationAsync(dtoToService);
             return CreatedAtAction(nameof(GetById), new { id = created.IdOwner }, created);
         }
+
+        [HttpGet("ObtAllXFilter")]
+        public async Task<IActionResult> ObtAllXFilter(string term)
+        {
+            var result = await _service.ObtAllXFilter(term);
+            if (result.Any())
+            {
+                return Ok(result);
+            }
+            return NotFound("No se encontraron empleados con el filtro");
+        }
     }
 }

@@ -9,9 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CatalogModule } from './modules/catalog/catalog.module';
 import { HomeComponent } from './modules/home/home/home.component';
 import { MaterialModule } from './material/material.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from './modules/shared/shared.module';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { SharedModule } from './modules/shared/shared.module';
     SharedModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

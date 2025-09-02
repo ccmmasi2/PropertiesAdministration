@@ -76,6 +76,28 @@ namespace Properties.Infrastructure.Implementation
                 BirthDay = owner.BirthDay
             };
             return resultDto;
-        } 
+        }
+
+        public async Task<IEnumerable<OwnerDto>> ObtAllXFilter(string term)
+        {
+            var owners = await _db.Owners
+                   .Where(e =>
+                       e.Name.Contains(term) ||
+                       e.Identification.Contains(term)
+                   )
+                   .Select(x => new OwnerDto
+                   {
+                       IdOwner = x.IdOwner,
+                       Name = x.Name,
+                       IdentificationType = x.IdentificationType,
+                       Identification = x.Identification,
+                       Address = x.Address,
+                       Photo = x.Photo,
+                       BirthDay = x.BirthDay
+                   })
+                   .ToListAsync();
+
+            return owners;
+        }
     }
 }
