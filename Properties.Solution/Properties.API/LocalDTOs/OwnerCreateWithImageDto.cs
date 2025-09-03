@@ -17,7 +17,6 @@ namespace Properties.API.LocalDTOs
         [Required, MaxLength(500)]
         public string Address { get; init; } = default!;
 
-        [Required]
         public IFormFile? Photo { get; init; }
 
         [Required]

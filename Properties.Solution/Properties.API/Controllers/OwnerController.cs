@@ -56,7 +56,7 @@ namespace Properties.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] OwnerCreateWithImageDto dto)
         {
-            string? photoUrl = null;
+            string? photoUrl = "No image yet";
             if (dto.Photo != null)
             {
                 var photoName = $"Owner_{dto.Identification}_{DateTime.Now:yyyyMMddHHmmssfff}";
