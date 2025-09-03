@@ -37,5 +37,10 @@ namespace Properties.Domain
             Photo = photo;
             BirthDay = birthDay;
         }
+
+        public void UpdatePhoto(string? photo)
+        {
+            Photo = photo;
+        }
     }
 }

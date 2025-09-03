@@ -82,6 +82,7 @@
 							<div class="form-group">
 								<label class="labelText" for="photo">Foto:</label>
 								<input type="file" id="photo" (change)="onFileSelected($event)">
+								<button class="button" type="submit" (click)="cargarImagen()" *ngIf="activateSubmitButton">Cargar Imagen</button>
 							</div>
 								
 							<div class="form-group">

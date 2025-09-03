@@ -6,6 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { PropertyImageDTO } from '@app/models/propertyImage.model';
+import { OwnerImageDTO } from '@app/models/ownerImage.model';
 
 @Injectable({
   providedIn: 'root'
@@ -262,7 +263,7 @@ export class ApiConnectionService {
     );
   }
   
-  UploadImage(idProperty: number, photoFile?: File): Observable<PropertyImageDTO> {
+  UploadPropertyImage(idProperty: number, photoFile?: File): Observable<PropertyImageDTO> {
     const url = `${this.baseUrl}/api/PropertyImage`;
     
     const formData = new FormData();
@@ -272,8 +273,6 @@ export class ApiConnectionService {
       formData.append('File', photoFile, photoFile.name);
     }
 
-    console.log('ccmmasi formData ', formData);
-
     return this.http.post<PropertyImageDTO>(url, formData).pipe(
       catchError((error: any) => {
         console.error('Error cargando la imagen:', error);
@@ -281,4 +280,23 @@ export class ApiConnectionService {
       })
     )
   } 
+
+  UploadOwnerImage(idOwner: number, identification: string, photoFile?: File): Observable<string> {
+    const url = `${this.baseUrl}/api/Owner/UpdateImage`;
+
+    const formData = new FormData();
+    formData.append('idOwner', idOwner.toString());
+    formData.append('identification', identification);
+
+    if (photoFile) {
+      formData.append('Photo', photoFile, photoFile.name);
+    }
+
+    return this.http.put(url, formData, { responseType: 'text' }).pipe(
+      catchError((error: any) => {
+        const serverMessage = error?.error || 'Error cargando la imagen';
+        return throwError(() => serverMessage);
+      })
+    );
+  }
 }

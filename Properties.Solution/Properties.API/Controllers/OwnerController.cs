@@ -139,5 +139,23 @@ namespace Properties.API.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPut("UpdateImage")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> UpdateImage([FromForm] OwnerUpdateImageDto dto)
+        {
+            string? photoUrl = null;
+            if (dto.Photo != null)
+            {
+                var photoName = $"Owner_{dto}_{DateTime.Now:yyyyMMddHHmmssfff}";
+                await using var stream = dto.Photo.OpenReadStream();
+                photoUrl = await _photoService.UploadPhotoAsync(stream, photoName, "owners");
+            }
+
+            var result = await _service.UpdatePhoto(dto.IdOwner, photoUrl);
+            return Ok(result);
+        }
     }
 }

@@ -70,6 +70,20 @@ namespace Properties.Infrastructure.Implementation
             return $"Propietario con ID {dto.IdOwner} actualizado correctamente.";
         }
 
+        public async Task<string> UpdatePhoto(int IdOwner, string PhotoUrl)
+        {
+            var owner = await _db.Owners.FindAsync(IdOwner);
+            if (owner is null)
+                throw new NotFoundException($"Propietario con ID {IdOwner} no encontrado.");
+
+            owner.UpdatePhoto(PhotoUrl);
+
+            _db.Owners.Update(owner);
+            await _db.SaveChangesAsync();
+
+            return $"Imagen actualizada correctamente.";
+        }
+
         public async Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting)
         {
             var query = _db.Owners.AsQueryable();

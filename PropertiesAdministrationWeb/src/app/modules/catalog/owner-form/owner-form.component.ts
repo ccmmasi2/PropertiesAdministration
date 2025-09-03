@@ -191,5 +191,28 @@ export class OwnerFormComponent implements OnInit {
     if (event.target.files && event.target.files.length > 0) {
       this.selectedPhoto = event.target.files[0];
     }
+  }  
+
+  cargarImagen(): void {
+    if (this.ownerForm.valid) {
+      this.apiConnectionService.UploadOwnerImage(this.ownerId, this.identification, this.selectedPhoto)
+        .subscribe({
+          next: (message: string) => {
+            this.alertService.showAlert(message, 'success');
+            this.loadOwner(this.ownerId);
+          },
+          error: (error: string) => {
+            const message = `Error al cargar la imagen: ${error}`;
+            this.alertService.showAlert(message, 'error');
+            this.isCollapsed = true;
+          }
+        });
+    } else {
+      this.alertService.showAlert('Por favor llene los campos requeridos.', 'error');
+      this.isCollapsed = true;
+    }
   }
+
 }
+
+   

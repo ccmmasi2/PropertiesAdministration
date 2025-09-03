@@ -7,6 +7,7 @@ namespace Properties.Application.Interface
         Task<OwnerDto> CreateWithValidationAsync(OwnerDto dto);
         Task<string> Delete(int id);
         Task<string> Update(OwnerDto dto);
+        Task<string> UpdatePhoto(int IdOwner, string PhotoUrl);
 
         Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting);
 

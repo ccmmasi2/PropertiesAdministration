@@ -88,14 +88,14 @@
 							<div class="form-group" *ngIf="canUploadImages">
 								<label class="labelText" for="photo">Foto:</label>
 								<input type="file" id="photo" (change)="onFileSelected($event)">
-								<button class="button" type="submit" (click)="cargarImagen()">Cargar Imagen</button>
+								<button class="button" type="submit" (click)="cargarImagen()" *ngIf="activateSubmitButton">Cargar Imagen</button>
 							</div>
 								
 							<div class="form-group">
 								<div *ngIf="propertyImagesList.length > 0" class="photo-preview">
 									<div *ngFor="let img of propertyImagesList" class="photo-item">
 										<img [src]="img.file" alt="Property Photo" />
-      									<button type="button" class="delete-btn" (click)="disableImage(img.idPropertyImage, img.idProperty)">x</button>
+      									<button type="button" *ngIf="activateSubmitButton" class="delete-btn" (click)="disableImage(img.idPropertyImage, img.idProperty)">x</button>
 									</div>
 								</div>
 							</div>

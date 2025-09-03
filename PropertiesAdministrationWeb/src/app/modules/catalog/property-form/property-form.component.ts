@@ -301,7 +301,7 @@ export class PropertyFormComponent implements OnInit {
 
   cargarImagen(): void {
     if (this.propertyForm.valid) {
-      this.apiConnectionService.UploadImage(this.propertyId, this.selectedPhoto).subscribe({
+      this.apiConnectionService.UploadPropertyImage(this.propertyId, this.selectedPhoto).subscribe({
         next: () => {
           const message = 'Imagen cargada';
           this.alertService.showAlert(message, 'success');
