@@ -29,6 +29,8 @@ export class OwnerFormComponent implements OnInit {
   address: string = '';
   birthDay: string = '';
   activateSubmitButton: boolean = true;
+  selectedPhoto?: File;
+  photoUrl: string = ''; 
   
   constructor(
     public apiConnectionService: ApiConnectionService,
@@ -67,6 +69,7 @@ export class OwnerFormComponent implements OnInit {
       }
 
       this.selectIdentificationType = owner.identificationType;
+      this.photoUrl = owner.photo || ''
       this.isCollapsed = false; 
     });
   }  
@@ -133,7 +136,7 @@ export class OwnerFormComponent implements OnInit {
       else {
         const ownerRequest: OwnerDTO = this.prepareOwnerDTO();
 
-        this.apiConnectionService.createOwner(ownerRequest).subscribe({
+        this.apiConnectionService.createOwner(ownerRequest, this.selectedPhoto).subscribe({
           next: () => {
             const message = 'Propietario creado';
             this.alertService.showAlert(message, 'success');
@@ -181,5 +184,12 @@ export class OwnerFormComponent implements OnInit {
     this.birthDay = null!;
     this.activateSubmitButton = true;      
     this.ownerForm.resetForm();
+    this.photoUrl = '';
+  }
+
+  onFileSelected(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedPhoto = event.target.files[0];
+    }
   }
 }

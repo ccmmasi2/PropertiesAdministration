@@ -426,3 +426,12 @@ a:hover {
   text-align: right;
   padding-right: 8px;  
 }
+
+.photo-preview img {
+  width: 80px;     
+  height: 80px;
+  object-fit: cover;  
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-top: 5px;
+}

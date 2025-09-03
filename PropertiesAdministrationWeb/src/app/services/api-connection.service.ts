@@ -43,9 +43,21 @@ export class ApiConnectionService {
     );
   } 
   
-  createOwner(ownerRequest: OwnerDTO): Observable<OwnerDTO> {
+  createOwner(ownerRequest: OwnerDTO, photoFile?: File): Observable<OwnerDTO> {
     const url = `${this.baseUrl}/api/Owner`;
-    return this.http.post<OwnerDTO>(url, ownerRequest).pipe(
+    
+    const formData = new FormData();
+    formData.append('Name', ownerRequest.name);
+    formData.append('IdentificationType', ownerRequest.identificationType);
+    formData.append('Identification', ownerRequest.identification);
+    formData.append('Address', ownerRequest.address);
+    formData.append('BirthDay', ownerRequest.birthDay);
+
+    if (photoFile) {
+      formData.append('Photo', photoFile, photoFile.name);
+    }
+
+    return this.http.post<OwnerDTO>(url, formData).pipe(
       catchError((error: any) => {
         console.error('Error creando owner:', error);
         throw error;  

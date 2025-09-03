@@ -111,7 +111,10 @@ export class PropertyListComponent implements OnInit {
     const offsetX = 250;
     const offsety = 9;
     this.dialog.open(ActionsDialogComponent, {
-      data: { dataId: propertyObject.idProperty },
+      data: { 
+        dataId: propertyObject.idProperty,
+        fromPropertyList: true 
+      },
       position: {
         top: event.clientY - offsety + 'px',
         left: event.clientX - offsetX + 'px',

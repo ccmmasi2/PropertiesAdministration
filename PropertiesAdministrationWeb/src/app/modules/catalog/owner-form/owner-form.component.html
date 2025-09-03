@@ -78,6 +78,14 @@
 								#birthDayField="ngModel"
 								[ngClass]="{ 'inputText': true, 'ng-invalid': birthDayField.invalid && (birthDayField.dirty || birthDayField.touched) }">
 							</div>
+
+							<div class="form-group">
+								<label class="labelText" for="photo">Foto:</label>
+								<input type="file" id="photo" (change)="onFileSelected($event)">
+								<div *ngIf="photoUrl" class="photo-preview">
+									<img [src]="photoUrl" alt="Owner Photo" />
+								</div>
+							</div>
 							
 						</form>
 						<button class="button" type="submit" (click)="submitForm()" *ngIf="activateSubmitButton">Submit</button>

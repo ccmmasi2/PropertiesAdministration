@@ -8,6 +8,7 @@ import { EventService } from '@app/services/event.service';
 })
 export class ActionsDialogComponent implements OnInit {
   dataId!: number;
+  hidePropertiesButton: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<ActionsDialogComponent>,
@@ -17,6 +18,13 @@ export class ActionsDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataId = this.data.dataId;
+
+    if (this.data.fromPropertyList) {
+      this.hidePropertiesButton = true;  
+    } else {
+      this.hidePropertiesButton = false;  
+    }
+
   }
  
   invokeWatchClickEvent() {
@@ -34,7 +42,7 @@ export class ActionsDialogComponent implements OnInit {
     this.dialogRef.close(); 
   }
  
-  invokeWatchBeneficiariesClickEvent() {
+  invokeWatchPropertiesClickEvent() {
     this.eventService.emitWatchPropertiesButtonClick(this.dataId);
     this.dialogRef.close(); 
   }

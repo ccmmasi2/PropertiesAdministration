@@ -12,8 +12,8 @@
             <div class="buttonActions fa fa-trash" (click)="invokeDeleteClickEvent()">
                 <span>Eliminar</span>
             </div>
-            <div class="separator"></div>
-            <div class="buttonActions fa fa-users" (click)="invokeWatchBeneficiariesClickEvent()">
+            <div *ngIf="!hidePropertiesButton" class="separator"></div>
+            <div *ngIf="!hidePropertiesButton" class="buttonActions fa fa-users" (click)="invokeWatchPropertiesClickEvent()">
                 <span>Propiedades</span>
             </div>
         </div> 
