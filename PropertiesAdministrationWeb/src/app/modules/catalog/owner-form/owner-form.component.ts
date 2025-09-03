@@ -49,10 +49,7 @@ export class OwnerFormComponent implements OnInit {
       this.loadOwner(ownerId);
       this.ownerId = ownerId;
       this.activateSubmitButton = true;      
-    });
-    this.eventService.deleteButtonClick.subscribe((ownerId: number) => {
-      this.deleteOwner(ownerId);
-    });
+    }); 
     this.eventService.watchPropertiesButtonClick.subscribe((ownerId: number) => {
       this.router.navigate(['system/properties/',  { ownerId: ownerId } ]);
     });
@@ -73,27 +70,6 @@ export class OwnerFormComponent implements OnInit {
       this.isCollapsed = false; 
     });
   }  
-
-  deleteOwner(ownerId: number) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px'
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiConnectionService.deleteOwner(ownerId).subscribe(
-          (response) => { 
-            this.alertService.showAlert(response.message, 'success');
-            this.refreshOwnerList();
-          },
-          (error) => {
-            const message = error;
-            this.alertService.showAlert(message, 'error');
-          }
-        );
-      }
-    });
-  }
 
   ngOnInit(): void {
     this.loadDataOptions(); 
@@ -212,7 +188,6 @@ export class OwnerFormComponent implements OnInit {
       this.isCollapsed = true;
     }
   }
-
 }
 
    

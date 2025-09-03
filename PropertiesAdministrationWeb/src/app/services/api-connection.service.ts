@@ -91,16 +91,6 @@ export class ApiConnectionService {
     );
   }
   
-  deleteOwner(id: number): Observable<{ message: string }> {
-    const url = `${this.baseUrl}/api/Owner/Delete/${id}`;
-    return this.http.delete< {message: string }>(url).pipe(
-       catchError(error => {
-        const message = typeof error.error === 'string' ? error.error : error.error?.message || 'Ocurrió un error desconocido';
-        return throwError(message); 
-      })
-    );
-  }  
-  
   getOwnerXId(ownerId: number): Observable<OwnerDTO> {
     const url = `${this.baseUrl}/api/Owner/${ownerId}`;
     return this.http.get<OwnerDTO>(url).pipe(
@@ -208,16 +198,6 @@ export class ApiConnectionService {
           }
         }
         return throwError(errorMessage);
-      })
-    );
-  }
-  
-  deleteProperty(id: number): Observable<{ message: string }> {
-    const url = `${this.baseUrl}/api/Property/Delete/${id}`;
-    return this.http.delete< {message: string }>(url).pipe(
-       catchError(error => {
-        const message = typeof error.error === 'string' ? error.error : error.error?.message || 'Ocurrió un error desconocido';
-        return throwError(message); 
       })
     );
   } 

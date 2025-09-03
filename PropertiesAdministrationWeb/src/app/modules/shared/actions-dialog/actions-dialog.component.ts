@@ -24,7 +24,6 @@ export class ActionsDialogComponent implements OnInit {
     } else {
       this.hidePropertiesButton = false;  
     }
-
   }
  
   invokeWatchClickEvent() {
@@ -35,12 +34,7 @@ export class ActionsDialogComponent implements OnInit {
   invokeEditClickEvent() {
     this.eventService.emitEditButtonClick(this.dataId);
     this.dialogRef.close(); 
-  }
- 
-  invokeDeleteClickEvent() {
-    this.eventService.emitDeleteButtonClick(this.dataId);
-    this.dialogRef.close(); 
-  }
+  } 
  
   invokeWatchPropertiesClickEvent() {
     this.eventService.emitWatchPropertiesButtonClick(this.dataId);

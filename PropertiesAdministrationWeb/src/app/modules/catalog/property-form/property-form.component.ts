@@ -58,10 +58,7 @@ export class PropertyFormComponent implements OnInit {
       this.loadProperty(propertyId);
       this.propertyId = propertyId;
       this.activateSubmitButton = true;      
-    });
-    this.eventService.deleteButtonClick.subscribe((propertyId: number) => {
-      this.deleteProperty(propertyId);
-    });
+    }); 
   }
   
   ngOnInit(): void {
@@ -123,27 +120,6 @@ export class PropertyFormComponent implements OnInit {
     this.apiConnectionService.getOwnerXId(ownerId)
     .subscribe((owner) => { 
       this.selectOwner(owner);
-    });
-  }
-  
-  deleteProperty(propertyId: number) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px'
-    });
-    
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.apiConnectionService.deleteProperty(propertyId).subscribe(
-          (response) => { 
-            this.alertService.showAlert(response.message, 'success');
-            this.refreshPropertyList();
-          },
-          (error) => {
-            const message = error;
-            this.alertService.showAlert(message, 'error');
-          }
-        );
-      }
     });
   }
   

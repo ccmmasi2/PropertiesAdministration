@@ -7,7 +7,6 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class EventService {
   watchButtonClick: EventEmitter<number> = new EventEmitter<number>();
   editButtonClick: EventEmitter<number> = new EventEmitter<number>();
-  deleteButtonClick: EventEmitter<number> = new EventEmitter<number>();
   watchPropertiesButtonClick: EventEmitter<number> = new EventEmitter<number>();
 
   emitWatchButtonClick(ownerId: number) {
@@ -16,11 +15,7 @@ export class EventService {
 
   emitEditButtonClick(ownerId: number) {
     this.editButtonClick.emit(ownerId);
-  }
-
-  emitDeleteButtonClick(ownerId: number) {
-    this.deleteButtonClick.emit(ownerId);
-  }
+  } 
 
   emitWatchPropertiesButtonClick(ownerId: number) {
     this.watchPropertiesButtonClick.emit(ownerId);
