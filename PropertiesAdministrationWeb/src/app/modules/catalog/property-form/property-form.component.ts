@@ -286,6 +286,7 @@ export class PropertyFormComponent implements OnInit {
           next: (response) => {
             this.alertService.showAlert(response, 'success');
 
+            this.selectedPhoto = null;
             this.loadImages(idProperty);
           },
           error: (error) => {
