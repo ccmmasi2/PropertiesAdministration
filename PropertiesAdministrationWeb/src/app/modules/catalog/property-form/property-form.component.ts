@@ -37,6 +37,8 @@ export class PropertyFormComponent implements OnInit {
   activateSubmitButton: boolean = true;
   photoUrl: string = ''; 
   propertyImagesList: { idPropertyImage: number, file: string, enable: boolean }[] = [];
+  selectedPhoto?: File;
+  canUploadImages: boolean = false;
   
   constructor(
     public apiConnectionService: ApiConnectionService,
@@ -101,6 +103,7 @@ export class PropertyFormComponent implements OnInit {
     .subscribe((property) => { 
       this.propertyForm.reset(property);
       this.isCollapsed = false; 
+      this.canUploadImages = true;
       
       this.photoUrl =  ''
       this.loadImages(property.idProperty);
@@ -237,6 +240,7 @@ export class PropertyFormComponent implements OnInit {
     this.propertyForm.resetForm();
 
     this.photoUrl = '';
+    this.canUploadImages = false;
   }
   
   onSearchChange(): void {
@@ -263,6 +267,38 @@ export class PropertyFormComponent implements OnInit {
     setTimeout(() => {   
       this.ownerResults = [];
     }, 200);
+  }
+
+  onFileSelected(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      this.selectedPhoto = event.target.files[0];
+    }
+  }
+
+  disableImage(idPropertyImage: number, idProperty: number) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.apiConnectionService.DisableImage(idPropertyImage).subscribe({
+          next: (response) => {
+            this.alertService.showAlert(response, 'success');
+
+            this.loadImages(idProperty);
+          },
+          error: (error) => {
+            const message = typeof error === 'string' ? error : error.message || 'Ocurrió un error';
+            this.alertService.showAlert(message, 'error');
+          }
+        });
+      }
+    });
+  }
+  
+  cargarImagen(){
+    
   }
 }
 

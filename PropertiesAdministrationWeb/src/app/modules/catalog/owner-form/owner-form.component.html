@@ -82,6 +82,9 @@
 							<div class="form-group">
 								<label class="labelText" for="photo">Foto:</label>
 								<input type="file" id="photo" (change)="onFileSelected($event)">
+							</div>
+								
+							<div class="form-group">
 								<div *ngIf="photoUrl" class="photo-preview">
 									<img [src]="photoUrl" alt="Owner Photo" />
 								</div>

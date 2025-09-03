@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Properties.API.LocalDTOs;
 using Properties.Application.Interface;
 using Properties.Application.Interface.Utils;
@@ -59,6 +61,19 @@ namespace Properties.API.Controllers
 
             var created = await _service.CreateWithValidationAsync(dtoToService);
             return CreatedAtAction(nameof(GetById), new { id = created.IdPropertyImage }, created);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
+        [HttpPut("DisableImage")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<string>> DisableImage([FromBody] int id)
+        {
+            if (id == 0)
+                return BadRequest("ID invalido");
+
+            var result = await _service.DisableImage(id);
+            return Ok(result);
         }
     }
 }

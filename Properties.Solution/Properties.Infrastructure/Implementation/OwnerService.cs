@@ -70,7 +70,6 @@ namespace Properties.Infrastructure.Implementation
             return $"Propietario con ID {dto.IdOwner} actualizado correctamente.";
         }
 
-
         public async Task<(IEnumerable<OwnerDto> Items, int TotalCount)> GetAll(int page, int sizePage, string sorting)
         {
             var query = _db.Owners.AsQueryable();

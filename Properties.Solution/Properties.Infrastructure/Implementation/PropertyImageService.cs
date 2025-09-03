@@ -67,6 +67,20 @@ namespace Properties.Infrastructure.Implementation
                 IdProperty = propertyImage.IdProperty,
             };
             return resultDto;
-        } 
+        }
+
+        public async Task<string> DisableImage(int id)
+        {
+            var image = await _db.PropertyImages.FindAsync(id);
+            if (image is null)
+                throw new NotFoundException($"Imagen con ID {id} no encontrada.");
+
+            image.Update(false);
+
+            _db.PropertyImages.Update(image);
+            await _db.SaveChangesAsync();
+
+            return $"Imagen con ID {id} deshabilitada correctamente.";
+        }
     }
 }

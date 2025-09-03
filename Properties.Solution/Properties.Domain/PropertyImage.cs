@@ -1,4 +1,8 @@
-﻿namespace Properties.Domain
+﻿using System.Net;
+using System.Xml.Linq;
+using static Properties.Contracts.Enums.Enumerators;
+
+namespace Properties.Domain
 {
     public class PropertyImage
     {
@@ -16,6 +20,11 @@
             File = file;
             Enable = enable;
             IdProperty = idProperty;
+        }
+
+        public void Update(bool enable)
+        {
+            Enable = enable;
         }
     }
 }

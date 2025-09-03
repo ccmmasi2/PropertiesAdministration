@@ -240,4 +240,25 @@ export class ApiConnectionService {
       })
     );
   }  
+  
+  DisableImage(id: number): Observable<string> {
+    return this.http.put(`${this.baseUrl}/api/PropertyImage/DisableImage`, id, {
+      observe: 'response',
+      responseType: 'text' as 'json'
+    })
+    .pipe(
+      map(response => {
+        return 'imagen deshabilitada correctamente';
+      }),
+      catchError((error: HttpErrorResponse) => {
+        let errorMessage = 'Error al deshabilitada la imagen';
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Backend returned code ${error.status}, body was: ${error.error}`);
+        }
+        return throwError(errorMessage);
+      })
+    );
+  }
 }
