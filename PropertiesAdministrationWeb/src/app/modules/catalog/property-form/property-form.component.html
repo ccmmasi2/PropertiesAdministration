@@ -14,7 +14,7 @@
 								<label class="labelText" title="Autocompletar, escriba una letra">Propietario:</label> 
 								<input type="text" title="Autocompletar, escriba una letra" 
 								[(ngModel)]="searchOwnerTerm" (ngModelChange)="onSearchChange()" 
-								(blur)="clearResults()" name="searchOwnerTerm" [disabled]="isSearchOwnerTermDisabled">
+								(blur)="clearResults()" name="searchOwnerTerm">
 								<ul *ngIf="ownerResults.length">
 									<li *ngFor="let owner of ownerResults" 
 										(click)="selectOwner(owner)">{{ owner.name }} - {{ owner.idOwner }}

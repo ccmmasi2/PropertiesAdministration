@@ -74,7 +74,8 @@ namespace Properties.Infrastructure.Implementation
             if (property is null)
                 throw new NotFoundException($"Propiedad con ID {dto.IdProperty} no encontrada.");
 
-            var exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower());
+            var exists = await _db.Properties.AnyAsync(x => x.CodeInternal.ToLower() == dto.CodeInternal.ToLower()
+                                                         && x.IdProperty != dto.IdProperty);
             if (exists)
                 throw new InvalidOperationException($"Ya existe una propiedad con el código interno {dto.CodeInternal}.");
 

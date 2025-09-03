@@ -24,7 +24,6 @@ export class PropertyFormComponent implements OnInit {
   formByOwner: boolean = false;
   ownerIdByURL: number = 0;
   ownerURLInformation: string = '';
-  isSearchOwnerTermDisabled: boolean = false;
   
   searchOwnerTerm: string = '';
   propertyId: number = 0;
@@ -64,7 +63,6 @@ export class PropertyFormComponent implements OnInit {
   ngOnInit(): void {
     this.formByOwner = false;
     this.ownerURLInformation = '';
-    this.isSearchOwnerTermDisabled = false;
     
     this.route.params.subscribe(params => {
       if(params["ownerId"]) {
@@ -83,7 +81,6 @@ export class PropertyFormComponent implements OnInit {
         if (owner) {
           this.ownerURLInformation = 'del propietario: ' + owner.name;
           this.selectOwner(owner);
-          this.isSearchOwnerTermDisabled = true;
         } else {
           this.ownerURLInformation = 'Propietario no encontrado';
         }
@@ -102,10 +99,7 @@ export class PropertyFormComponent implements OnInit {
     .subscribe((property) => { 
       this.propertyForm.reset(property);
       this.isCollapsed = false; 
-      
-      if(this.ownerIdByURL && this.ownerIdByURL > 0) {
-        this.loadOwner(property.idOwner);
-      }
+      this.loadOwner(property.idOwner);
     });
   } 
   
@@ -203,7 +197,8 @@ export class PropertyFormComponent implements OnInit {
       address: this.address, 
       codeInternal: this.codeInternal,
       price: this.price,
-      year: this.year
+      year: this.year,
+      ownerName: ''
     }
     
     return propertyRequest;
@@ -223,6 +218,8 @@ export class PropertyFormComponent implements OnInit {
     this.year = 0;
     this.codeInternal = '';
     this.price = 0;
+    this.selectOwnerId = 0;
+    this.searchOwnerTerm= '';  
     this.activateSubmitButton = true;      
     this.propertyForm.resetForm();
   }

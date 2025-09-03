@@ -82,7 +82,7 @@ namespace Properties.API.Controllers
         [HttpGet("ObtAllXFilter")]
         public async Task<IActionResult> ObtAllXFilter(string term)
         {
-            var result = await _service.ObtAllXFilter(term);
+            var result = await _service.ObtAllXFilter(term.ToLower());
             if (result.Any())
             {
                 return Ok(result);

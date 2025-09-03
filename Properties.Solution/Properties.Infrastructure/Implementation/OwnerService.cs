@@ -123,7 +123,7 @@ namespace Properties.Infrastructure.Implementation
         {
             var owners = await _db.Owners
                    .Where(e =>
-                       e.Name.Contains(term) ||
+                       e.Name.ToLower().Contains(term) ||
                        e.Identification.Contains(term)
                    )
                    .Select(x => new OwnerDto
@@ -140,6 +140,5 @@ namespace Properties.Infrastructure.Implementation
 
             return owners;
         }
-
     }
 }

@@ -113,8 +113,8 @@ export class ApiConnectionService {
     const url = `${this.baseUrl}/api/Owner/ObtAllXFilter?term=${searchTerm}`;
     return this.http.get<OwnerDTO[]>(url).pipe(
       catchError(error => {
-        console.error('Error obteniendo empleados por filtro:', error);
-        return throwError(() => new Error('Error obteniendo empleados por filtro'));
+        console.error('Error obteniendo propietarios por filtro:', error);
+        return throwError(() => new Error('Error obteniendo propietarios por filtro'));
       })
     );
   }  

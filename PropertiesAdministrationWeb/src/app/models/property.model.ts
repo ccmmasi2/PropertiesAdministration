@@ -6,4 +6,5 @@ export class PropertyDTO {
     codeInternal: string = '';
     year: number = 0;
     idOwner: number = 0;
+    ownerName: string = '';
 } 
