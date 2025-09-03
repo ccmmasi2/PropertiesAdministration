@@ -36,7 +36,7 @@ export class PropertyFormComponent implements OnInit {
   year: number = 0;
   activateSubmitButton: boolean = true;
   photoUrl: string = ''; 
-  propertyImagesList: { idPropertyImage: number, file: string, enable: boolean }[] = [];
+  propertyImagesList: { idPropertyImage: number, file: string}[] = [];
   selectedPhoto?: File;
   canUploadImages: boolean = false;
   
@@ -115,7 +115,7 @@ export class PropertyFormComponent implements OnInit {
   loadImages(idProperty: number) {
     this.apiConnectionService.getPropertyImagesXPropertyId(idProperty)
     .subscribe((images) => { 
-      this.propertyImagesList = images.filter(img => img.enable);
+      this.propertyImagesList = images;
     });
   }
   
@@ -295,10 +295,26 @@ export class PropertyFormComponent implements OnInit {
         });
       }
     });
-  }
-  
-  cargarImagen(){
-    
+  } 
+
+  cargarImagen(): void {
+    if (this.propertyForm.valid) {
+      this.apiConnectionService.UploadImage(this.propertyId, this.selectedPhoto).subscribe({
+        next: () => {
+          const message = 'Imagen cargada';
+          this.alertService.showAlert(message, 'success');
+          this.loadImages(this.propertyId);
+        },
+        error: (error) => {
+          const message = `Error al cargar la imagen: ${error.message || error}`;
+          this.alertService.showAlert(message, 'error');
+          this.isCollapsed = true;
+        }
+      });
+    }  else {
+      this.alertService.showAlert('Por favor llene los campos requeridos.', 'error');
+      this.isCollapsed = true;
+    }
   }
 }
 

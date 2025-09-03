@@ -8,9 +8,6 @@ namespace Properties.API.LocalDTOs
         public IFormFile? File { get; init; }
 
         [Required]
-        public bool Enable { get; init; } = default!;
-
-        [Required]
         public int IdProperty { get; init; } = default!;
     }
 }

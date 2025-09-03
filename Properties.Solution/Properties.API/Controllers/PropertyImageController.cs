@@ -55,7 +55,7 @@ namespace Properties.API.Controllers
             var dtoToService = new PropertyImageDto
             {
                 File = photoUrl,
-                Enable = dto.Enable,
+                Enable = true,
                 IdProperty = dto.IdProperty
             };
 

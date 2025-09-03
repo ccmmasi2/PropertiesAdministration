@@ -261,4 +261,24 @@ export class ApiConnectionService {
       })
     );
   }
+  
+  UploadImage(idProperty: number, photoFile?: File): Observable<PropertyImageDTO> {
+    const url = `${this.baseUrl}/api/PropertyImage`;
+    
+    const formData = new FormData();
+    formData.append('idProperty', idProperty.toString());
+
+    if (photoFile) {
+      formData.append('File', photoFile, photoFile.name);
+    }
+
+    console.log('ccmmasi formData ', formData);
+
+    return this.http.post<PropertyImageDTO>(url, formData).pipe(
+      catchError((error: any) => {
+        console.error('Error cargando la imagen:', error);
+        throw error;  
+      })
+    )
+  } 
 }
