@@ -241,6 +241,7 @@ export class PropertyFormComponent implements OnInit {
 
     this.photoUrl = '';
     this.canUploadImages = false;
+    this.propertyImagesList = [];
   }
   
   onSearchChange(): void {
@@ -286,7 +287,7 @@ export class PropertyFormComponent implements OnInit {
           next: (response) => {
             this.alertService.showAlert(response, 'success');
 
-            this.selectedPhoto = null;
+            this.propertyImagesList = [];
             this.loadImages(idProperty);
           },
           error: (error) => {
