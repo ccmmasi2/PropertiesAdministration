@@ -21,10 +21,12 @@ namespace Properties.API.Controllers
         }
 
         [Authorize(Policy = "AdminOnly")]
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("GetAllXPropertyId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<object>>> GetAllXPropertyId(int propertyId)
         {
-            var propertyImages = await _service.GetAllAsync();
+            var propertyImages = await _service.GetAllXPropertyId(propertyId);
+
             return Ok(propertyImages);
         }
 

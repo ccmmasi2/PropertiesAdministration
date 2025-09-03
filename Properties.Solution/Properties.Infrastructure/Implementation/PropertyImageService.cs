@@ -16,9 +16,10 @@ namespace Properties.Infrastructure.Implementation
             _db = db;
         }
 
-        public async Task<List<PropertyImageDto>> GetAllAsync()
+        public async Task<List<PropertyImageDto>> GetAllXPropertyId(int propertyId)
         {
             var dtos = await _db.PropertyImages
+                .Where(x => x.IdProperty == propertyId)
                  .Select(x => new PropertyImageDto
                  {
                      IdPropertyImage = x.IdPropertyImage,

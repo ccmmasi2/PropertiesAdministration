@@ -35,6 +35,8 @@ export class PropertyFormComponent implements OnInit {
   codeInternal: string = '';
   year: number = 0;
   activateSubmitButton: boolean = true;
+  photoUrl: string = ''; 
+  propertyImagesList: { idPropertyImage: number, file: string, enable: boolean }[] = [];
   
   constructor(
     public apiConnectionService: ApiConnectionService,
@@ -99,9 +101,20 @@ export class PropertyFormComponent implements OnInit {
     .subscribe((property) => { 
       this.propertyForm.reset(property);
       this.isCollapsed = false; 
+      
+      this.photoUrl =  ''
+      this.loadImages(property.idProperty);
+
       this.loadOwner(property.idOwner);
     });
   } 
+
+  loadImages(idProperty: number) {
+    this.apiConnectionService.getPropertyImagesXPropertyId(idProperty)
+    .subscribe((images) => { 
+      this.propertyImagesList = images.filter(img => img.enable);
+    });
+  }
   
   loadOwner(ownerId: number){
     this.apiConnectionService.getOwnerXId(ownerId)
@@ -222,6 +235,8 @@ export class PropertyFormComponent implements OnInit {
     this.searchOwnerTerm= '';  
     this.activateSubmitButton = true;      
     this.propertyForm.resetForm();
+
+    this.photoUrl = '';
   }
   
   onSearchChange(): void {

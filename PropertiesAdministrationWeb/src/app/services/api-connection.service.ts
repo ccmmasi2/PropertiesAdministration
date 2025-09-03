@@ -5,6 +5,7 @@ import { PropertyDTO } from '../models/property.model';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'environments/environment';
+import { PropertyImageDTO } from '@app/models/propertyImage.model';
 
 @Injectable({
   providedIn: 'root'
@@ -161,7 +162,6 @@ export class ApiConnectionService {
     
     return this.http.get<any>(url).pipe(
       map((response: any) => {
-        console.log('ccmmasi response.data ', response.data);
         return {
           currentPage: response.page,
           sizePage: response.pageSize,
@@ -227,6 +227,16 @@ export class ApiConnectionService {
       catchError(error => {
         console.error('Error obteniendo la propiedad:', error);
         return throwError(() => new Error('Error obteniendo la propiedad por id'));
+      })
+    );
+  }  
+
+  getPropertyImagesXPropertyId(idProperty: number): Observable<PropertyImageDTO[]> {
+    const url = `${this.baseUrl}/api/PropertyImage/GetAllXPropertyId?propertyId=${idProperty}`;
+    return this.http.get<PropertyImageDTO[]>(url).pipe(
+      catchError(error => {
+        console.error('Error obteniendo las imagenes:', error);
+        return throwError(() => new Error('Error obteniendo las imagenes por id'));
       })
     );
   }  
