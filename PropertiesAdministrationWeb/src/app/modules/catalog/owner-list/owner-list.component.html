@@ -20,7 +20,7 @@
   
             <ng-container matColumnDef="identification">
               <th mat-header-cell mat-sort-header *matHeaderCellDef>Identificación</th>
-              <td mat-cell *matCellDef="let element">{{ element.identification }}</td>
+              <td mat-cell *matCellDef="let element">{{ element.identification | number:'1.0-0' }}</td>
             </ng-container>   
   
             <ng-container matColumnDef="name">

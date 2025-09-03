@@ -97,6 +97,7 @@ export class PropertyFormComponent implements OnInit {
   }
   
   loadProperty(propertyId: number){
+    this.resetForm();
     this.apiConnectionService.getPropertyXId(propertyId)
     .subscribe((property) => { 
       this.propertyForm.reset(property);

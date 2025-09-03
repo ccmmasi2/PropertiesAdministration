@@ -108,8 +108,8 @@ export class PropertyListComponent implements OnInit {
 
   openActionsDialog(event: MouseEvent, row: any) {
     const propertyObject: PropertyDTO = row as PropertyDTO;
-    const offsetX = 240;
-    const offsety = 35;
+    const offsetX = 250;
+    const offsety = 9;
     this.dialog.open(ActionsDialogComponent, {
       data: { dataId: propertyObject.idProperty },
       position: {

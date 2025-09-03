@@ -421,3 +421,8 @@ a:hover {
   width: 150px; 
   min-width: 120px;  
 }
+
+.price-cell {
+  text-align: right;
+  padding-right: 8px;  
+}
