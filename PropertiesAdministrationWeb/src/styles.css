@@ -379,8 +379,8 @@ a:hover {
 }
 
 #addEdit.expanded {
-  max-height: 1000px; /* Ajusta este valor según el tamaño del contenido */
-}
+  max-height: 1000px;  
+} 
 
 .form-group ul {
   list-style-type: none;

@@ -6,7 +6,7 @@ import { PropertyFormComponent } from './property-form/property-form.component';
 import { PropertyListComponent } from './property-list/property-list.component';
 import { CatalogRoutingModule } from './catalog-routing.module';
 import { MaterialModule } from 'app/material/material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumericInputDirective } from '@app/rules/numeric-input.directive';
 
 @NgModule({
@@ -14,7 +14,8 @@ import { NumericInputDirective } from '@app/rules/numeric-input.directive';
     CommonModule,
     CatalogRoutingModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     OwnerFormComponent,

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { Sort } from '@angular/material/sort';
@@ -37,12 +38,23 @@ export class PropertyListComponent implements OnInit {
   sorting: string = '';
   pageSizeOptions = [10, 25, 50];
 
+  filterForm = this.fb.group({
+    ownerNameOrId: [''],
+    address: [''],
+    codeInternal: [''],
+    priceMin: [''],
+    priceMax: [''],
+    yearMin: [''],
+    yearMax: ['']
+  });
+
   constructor(
     private alertService: AlertService,
     public reactiveSharedService: ReactiveSharedService,
     public _MatPaginatorIntl: MatPaginatorIntl,
     private dialog: MatDialog,
     private route: ActivatedRoute,
+    private fb: FormBuilder
   ) {
     this.dataSource = new MatTableDataSource<PropertyDTO>();
    }
@@ -121,4 +133,28 @@ export class PropertyListComponent implements OnInit {
       },
     });
   }
+
+  resetFilters() {
+    this.filterForm.reset();
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    const filters = this.filterForm.value;
+
+    this.dataSource.filterPredicate = (data: any, filter: string) => {
+      const f = JSON.parse(filter);
+
+      return (!f.ownerNameOrId || data.ownerName.toLowerCase().includes(f.ownerNameOrId.toLowerCase()) 
+              || data.idProperty.toString().includes(f.ownerNameOrId)) &&
+            (!f.address || data.address.toLowerCase().includes(f.address.toLowerCase())) &&
+            (!f.codeInternal || data.codeInternal.toLowerCase().includes(f.codeInternal.toLowerCase())) &&
+            (!f.priceMin || data.price >= f.priceMin) &&
+            (!f.priceMax || data.price <= f.priceMax) &&
+            (!f.yearMin || data.year >= f.yearMin) &&
+            (!f.yearMax || data.year <= f.yearMax);
+    };
+
+    this.dataSource.filter = JSON.stringify(filters);
+  } 
 }

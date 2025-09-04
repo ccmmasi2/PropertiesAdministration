@@ -5,6 +5,54 @@
         <div class="contain-title">Listado</div> 
       </div>
       <div class="contain-body">
+             
+					<div class="form-container">
+           
+            <form class="filters" [formGroup]="filterForm">
+              <div class="form-field">
+                <label>Nombre o Id de propietario</label>
+                <input type="text" formControlName="ownerNameOrId" class="inputText" />
+              </div>
+
+              <div class="form-field">
+                <label>Dirección</label>
+                <input type="text" formControlName="address" class="inputText" />
+              </div>
+
+              <div class="form-field">
+                <label>Código interno</label>
+                <input type="text" formControlName="codeInternal" class="inputText" />
+              </div>
+
+              <div class="range-fields">
+                <div class="form-field">
+                  <label>Precio mínimo</label>
+                  <input type="number" formControlName="priceMin" class="inputText" />
+                </div>
+                <div class="form-field">
+                  <label>Precio máximo</label>
+                  <input type="number" formControlName="priceMax" class="inputText" />
+                </div>
+              </div>
+
+              <div class="range-fields">
+                <div class="form-field">
+                  <label>Año mínimo</label>
+                  <input type="number" formControlName="yearMin" class="inputText" maxlength="4" />
+                </div>
+                <div class="form-field">
+                  <label>Año máximo</label>
+                  <input type="number" formControlName="yearMax" class="inputText" maxlength="4" />
+                </div>
+              </div>
+
+              <button type="button" class="btn btn-primary" (click)="applyFilters()">Aplicar</button>
+              <button type="button" class="btn btn-warn" (click)="resetFilters()">Limpiar</button>
+             
+            </form>
+             
+          </div> 
+          
         <div class="contain-table">
           <table mat-table matSort [dataSource]="dataSource" (matSortChange)="onSortChange($event)">
   
