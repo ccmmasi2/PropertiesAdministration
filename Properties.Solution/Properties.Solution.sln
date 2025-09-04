@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.API", "Properties.API\Properties.API.csproj", "{2D946DCA-4E90-431D-86F9-49721E70B141}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.API", "Properties.API\Properties.API.csproj", "{2D946DCA-4E90-431D-86F9-49721E70B141}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Application", "Propierties.Application\Properties.Application.csproj", "{0D0BBEC7-356C-406D-840F-8AE20E28B1FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Application", "Propierties.Application\Properties.Application.csproj", "{0D0BBEC7-356C-406D-840F-8AE20E28B1FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Contracts", "Properties.Contracts\Properties.Contracts.csproj", "{EE129120-2188-43A6-87B0-0A1F111C06ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Contracts", "Properties.Contracts\Properties.Contracts.csproj", "{EE129120-2188-43A6-87B0-0A1F111C06ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Domain", "Properties.Domain\Properties.Domain.csproj", "{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Domain", "Properties.Domain\Properties.Domain.csproj", "{F3EF0423-7DE4-4E3C-A5BD-91AECA57FC28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Infrastructure", "Properties.Infrastructure\Properties.Infrastructure.csproj", "{0915BB2A-FAF8-4B59-ACF5-E098D958F358}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Properties.Tests", "Properties.Tests\Properties.Tests.csproj", "{FE19197F-1619-4361-9F60-2BD45B34875F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Properties.Infrastructure", "Properties.Infrastructure\Properties.Infrastructure.csproj", "{0915BB2A-FAF8-4B59-ACF5-E098D958F358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{0915BB2A-FAF8-4B59-ACF5-E098D958F358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0915BB2A-FAF8-4B59-ACF5-E098D958F358}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0915BB2A-FAF8-4B59-ACF5-E098D958F358}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE19197F-1619-4361-9F60-2BD45B34875F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE19197F-1619-4361-9F60-2BD45B34875F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE19197F-1619-4361-9F60-2BD45B34875F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE19197F-1619-4361-9F60-2BD45B34875F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

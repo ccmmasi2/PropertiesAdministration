@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "PropertiesAdministrationWeb"
+  "defaultProject": "PropertiesAdministrationWeb",
+  "cli": {
+    "analytics": false
+  }
 }
